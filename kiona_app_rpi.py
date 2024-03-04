@@ -3,7 +3,7 @@ from PIL import Image
 import datetime
 import os
 
-mode = "light"
+mode = "dark"
 
 customtkinter.set_appearance_mode(mode)
 customtkinter.set_default_color_theme("dark-blue")
@@ -361,11 +361,20 @@ wallpaper_image = customtkinter.CTkImage(
     size=(image_width, image_height),
 )
 
+wallpaper_label_font = customtkinter.CTkFont(
+    family="Segoe UI Black",
+    size=80,
+    weight="bold",
+    slant="roman",
+    underline=False,
+    overstrike=False, 
+)
 
 wallpaper_image_label = customtkinter.CTkLabel(
     master=home_page,
     text="KIONA",
-    font=("Segoe UI Black", 60),
+    # font=("Segoe UI Black", 80),
+    font=wallpaper_label_font,
     image=wallpaper_image,
     compound="center",
 )
@@ -375,7 +384,7 @@ wallpaper_image_label.pack(fill='both', expand=True)
 app_bar = customtkinter.CTkFrame(
     master=home_page,
     height=30,
-    width=1920,
+    width=1153,
     corner_radius=0,
     fg_color="#BEBEBE",
     bg_color="#BEBEBE",
@@ -395,7 +404,7 @@ day_label = customtkinter.CTkLabel(
     text="Weekday",
     font=("Segoe UI Semibold", 15),
 )
-day_label.place(x=115, y=5)
+day_label.place(x=125, y=5)
 
 modes_icon = customtkinter.CTkImage(
     light_image=Image.open('Images/moon_dark.png'),
@@ -414,20 +423,20 @@ modes_button = customtkinter.CTkButton(
     command=change_appearance_mode,
 
 )
-modes_button.place(x=1505, y=2)
-
+modes_button.place(x=1115, y=2)
+# modes_button.place(x=1120, y=2)
 
 # Task Bar & Stuff:
 task_bar = customtkinter.CTkFrame(
     master=home_page,
     height=40,
-    width=1920,
+    width=1153,
     corner_radius=0,
     fg_color="#A0A0A0",
     bg_color="#A0A0A0",
 
 )
-task_bar.place(x=0, y=800)
+task_bar.place(x=0, y=760)
 
 time_label = customtkinter.CTkLabel(
     master=task_bar,
@@ -451,7 +460,7 @@ settings_button = customtkinter.CTkButton(
     fg_color="transparent",
     hover=False,
 )
-settings_button.place(x=1495, y=2)
+settings_button.place(x=1105, y=2)
 
 
 # Home page Buttons:
@@ -472,7 +481,7 @@ video_door_phone_button = customtkinter.CTkButton(
     image=video_door_phone_icon,
     compound="left",
 )
-video_door_phone_button.place(x=1441, y=100, anchor="center")
+video_door_phone_button.place(x=1059, y=100, anchor="center")
 
 alarm_icon = customtkinter.CTkImage(
     light_image=Image.open('Images/alarm_dark2.png'),
@@ -491,7 +500,7 @@ alarm_button = customtkinter.CTkButton(
     image=alarm_icon,
     compound="left",
 )
-alarm_button.place(x=1441, y=165, anchor="center")
+alarm_button.place(x=1059, y=165, anchor="center")
 
 message_centre_icon = customtkinter.CTkImage(
     light_image=Image.open('Images/message_dark.png'),
@@ -511,7 +520,7 @@ message_centre_button = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(message_centre_page)
 )
-message_centre_button.place(x=1441, y=230, anchor="center")
+message_centre_button.place(x=1059, y=230, anchor="center")
 
 digital_frame_icon = customtkinter.CTkImage(
     light_image=Image.open('Images/digital_frame_icon_dark.png'),
@@ -531,7 +540,7 @@ digital_frame_button = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(digital_frame_page)
 )
-digital_frame_button.place(x=1441, y=295, anchor="center")
+digital_frame_button.place(x=1059, y=295, anchor="center")
 
 # Home Icon:
 home_icon = customtkinter.CTkImage(
@@ -561,7 +570,7 @@ back_icon = customtkinter.CTkImage(
 
 # Message centre page GUI components:
 
-# >>>>>>> Here
+
 
 home_button3 = customtkinter.CTkButton(
     master=message_centre_page,
@@ -575,14 +584,14 @@ home_button3 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button3.place(x=1442, y=100, anchor="center")
+home_button3.place(x=1059, y=100, anchor="center")
 
 message_centre_frame = customtkinter.CTkFrame(
     master=message_centre_page,
     fg_color="transparent",
-    bg_color="transparent"
+    bg_color="transparent",
 )
-message_centre_frame.pack(pady=230)
+message_centre_frame.pack(pady=320)
 
 message_icon = customtkinter.CTkImage(
     light_image=Image.open("Images/notice_icon_dark.png"),
@@ -592,15 +601,15 @@ message_icon = customtkinter.CTkImage(
 
 message_button = customtkinter.CTkButton(
     master=message_centre_frame,
-    width=160,
-    height=120,
+    width=170,
+    height=130,
     text="Message",
     font=("Segoe UI Semibold", 16),
     image=message_icon,
     compound="top",
     command=lambda: raise_page(message_page),
 )
-message_button.grid(row=0, column=0, pady=10, padx=10)
+message_button.grid(row=0, column=0, pady=10, padx=25)
 
 visitor_record_icon = customtkinter.CTkImage(
     light_image=Image.open("Images/visitor_record_icon_dark.png"),
@@ -610,15 +619,15 @@ visitor_record_icon = customtkinter.CTkImage(
 
 visitor_record_button = customtkinter.CTkButton(
     master=message_centre_frame,
-    width=160,
-    height=120,
+    width=170,
+    height=130,
     text="Visitor Record",
     font=("Segoe UI Semibold", 16),
     image=visitor_record_icon,
     compound="top",
     command=lambda: raise_page(visitor_record_page),
 )
-visitor_record_button.grid(row=0, column=1, pady=10, padx=10)
+visitor_record_button.grid(row=0, column=1, pady=10, padx=25)
 
 visitor_picture_icon = customtkinter.CTkImage(
     light_image=Image.open("Images/visitor_photo_light.png"),
@@ -628,98 +637,99 @@ visitor_picture_icon = customtkinter.CTkImage(
 
 visitor_picture_button = customtkinter.CTkButton(
     master=message_centre_frame,
-    width=160,
-    height=120,
+    width=170,
+    height=130,
     text="Visitor Picture",
     font=("Segoe UI Semibold", 16),
     image=visitor_picture_icon,
     compound="top",
     command=lambda: raise_page(visitor_picture_page),
 )
-visitor_picture_button.grid(row=0, column=2, pady=10, padx=10)
+visitor_picture_button.grid(row=0, column=2, pady=10, padx=25)
 
 # __________________________________________________________________________
 # Message page GUI Components:
 
 back_button1 = customtkinter.CTkButton(
     master=message_page,
-    text="  Back                    ",
+    text="  Back             ",
     corner_radius=0,
     height=50,
-    width=186,
+    width=189,
+#    width=186,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=back_icon,
     compound="left",
     command=lambda: raise_page(message_centre_page)
 )
-back_button1.place(x=930, y=100, anchor="center")
+back_button1.place(x=1059, y=100, anchor="center")
 
 home_button4 = customtkinter.CTkButton(
     master=message_page,
-    text="Home",
+    text="  Home             ",
     corner_radius=0,
     height=50,
-    width=186,
+    width=189,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=home_icon,
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button4.place(x=930, y=165, anchor="center")
+home_button4.place(x=1059, y=165, anchor="center")
 
 message_frame = customtkinter.CTkScrollableFrame(
     master=message_page,
     label_text="Notices",
     label_font=("Segoe UI Semibold", 18),
     label_anchor="center",
-    width=746,
-    height=446,
+    width=845,
+    height=600,
 )
-message_frame.pack(padx=30, pady=70, side="left")
-
+message_frame.pack(padx=50, pady=70, side="left")
 
 # __________________________________________________________________________
 # Visitor Records page GUI Components:
 
 back_button2 = customtkinter.CTkButton(
     master=visitor_record_page,
-    text="  Back                    ",
+    text="  Back             ",
     corner_radius=0,
     height=50,
-    width=186,
+    width=189,
+#    width=186,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=back_icon,
     compound="left",
     command=lambda: raise_page(message_centre_page)
 )
-back_button2.place(x=930, y=100, anchor="center")
+back_button2.place(x=1059, y=100, anchor="center")
 
 home_button5 = customtkinter.CTkButton(
     master=visitor_record_page,
-    text="  Home                  ",
+    text="  Home             ",
     corner_radius=0,
     height=50,
-    width=186,
+    width=189,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=home_icon,
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button5.place(x=930, y=165, anchor="center")
+home_button5.place(x=1059, y=165, anchor="center")
 
 visitor_record_frame = customtkinter.CTkScrollableFrame(
     master=visitor_record_page,
     label_text="Visitor Records",
     label_font=("Segoe UI Semibold", 18),
     label_anchor="center",
-    width=746,
-    height=446,
+    width=845,
+    height=600,
 )
-visitor_record_frame.pack(padx=30, pady=70, side="left")
+visitor_record_frame.pack(padx=50, pady=70, side="left")
 
 
 # __________________________________________________________________________
@@ -727,31 +737,32 @@ visitor_record_frame.pack(padx=30, pady=70, side="left")
 
 back_button3 = customtkinter.CTkButton(
     master=visitor_picture_page,
-    text="  Back                    ",
+    text="  Back             ",
     corner_radius=0,
     height=50,
-    width=186,
+    width=189,
+#    width=186,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=back_icon,
     compound="left",
     command=lambda: raise_page(message_centre_page)
 )
-back_button3.place(x=930, y=100, anchor="center")
+back_button3.place(x=1059, y=100, anchor="center")
 
 home_button6 = customtkinter.CTkButton(
     master=visitor_picture_page,
-    text="  Home                  ",
+    text="  Home             ",
     corner_radius=0,
     height=50,
-    width=186,
+    width=189,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=home_icon,
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button6.place(x=930, y=165, anchor="center")
+home_button6.place(x=1059, y=165, anchor="center")
 
 
 # Function to create a new window with the clicked image
@@ -780,10 +791,10 @@ visitor_picture_frame = customtkinter.CTkScrollableFrame(
     label_text="Visitor Pictures",
     label_font=("Segoe UI Semibold", 18),
     label_anchor="center",
-    width=746,
-    height=446,
+    width=845,
+    height=600,
 )
-visitor_picture_frame.pack(padx=30, pady=70, side="left")
+visitor_picture_frame.pack(padx=50, pady=70, side="left")
 
 # Pictures Directory
 visitor_pictures_directory_path = "Visitor_Pictures"
@@ -816,7 +827,7 @@ for i, row in enumerate(image_texts):
         iconified_image = customtkinter.CTkImage(
             light_image=Image.open(image_location),
             dark_image=Image.open(image_location),
-            size=(169, 120),
+            size=(170, 120),
         )
 
         deiconified_image = customtkinter.CTkImage(
@@ -831,12 +842,12 @@ for i, row in enumerate(image_texts):
             master=visitor_picture_frame,
             text="",
             font=("Segoe UI Semibold", 16),
-            width=160,
-            height=120,
+            width=181,
+            height=130,
             corner_radius=2,
             image=iconified_image,
         )
-        button.grid(row=i + 1, column=j, pady=5, padx=5)
+        button.grid(row=i + 1, column=j, pady=10, padx=15)
 
         image_buttons.append(button)
 
@@ -853,43 +864,43 @@ for i, row in enumerate(image_texts):
 
 home_button7 = customtkinter.CTkButton(
     master=digital_frame_page,
-    text="  Home                  ",
+    text="  Home             ",
     corner_radius=0,
     height=50,
-    width=186,
+    width=189,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=home_icon,
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button7.place(x=930, y=100, anchor="center")
+home_button7.place(x=1059, y=100, anchor="center")
 
-
+# Changed Colors:
 digital_frame = customtkinter.CTkFrame(
     master=digital_frame_page,
-    width=int(screen_width * 0.5),  # Adjust width based on your preference
-    height=int(screen_height * 0.5),  # Adjust height based on your preference
+    #width=int(screen_width * 0.5),  # Adjust width based on your preference
+    #height=int(screen_height * 0.5),  # Adjust height based on your preference
     fg_color="transparent",
     bg_color="transparent"
 )
-digital_frame.place(x=int(screen_width * 0.25), y=int(screen_height * 0.25))  # Adjust placement based on your preference
+digital_frame.place(x=420, y=250)  # Adjust placement based on your preference
 
-numbers_font = customtkinter.CTkFont(
-    family="Segoe UI Semibold",
-    weight="bold",
-    size=18,
-)
+# numbers_font = customtkinter.CTkFont(
+#     family="Segoe UI Semibold",
+#     weight="bold",
+#     size=18,
+# )
 
 # Create an entry field
 input_no_entry = customtkinter.CTkEntry(
     digital_frame,
-    font=numbers_font,
-    width=310,
-    height=50,
+    font=("Segoe UI Semibold", 19),
+    width=320,
+    height=60,
     corner_radius=5,
 )
-input_no_entry.grid(row=0, column=0, pady=10, padx=10, columnspan=3)
+input_no_entry.grid(row=0, column=0, pady=9, padx=12, columnspan=3)
 
 
 # Function to update the entry field when a button is clicked
@@ -920,13 +931,13 @@ for i, row in enumerate(frame_buttons_texts):
         button = customtkinter.CTkButton(
             digital_frame,
             text=value,
-            width=80,
-            height=50,
-            font=numbers_font,
+            width=90,
+            height=60,
+            font=("Segoe UI Semibold", 18),
             command=lambda v=value: on_button_click(v),
         )
 
-        button.grid(row=i+1, column=j, pady=5, padx=1)
+        button.grid(row=i+1, column=j, pady=9, padx=12)
         frame_buttons.append(button)
 
 
@@ -950,13 +961,13 @@ clear_icon = customtkinter.CTkImage(
 clear_button = customtkinter.CTkButton(
     master=digital_frame_page,
     text="",
-    width=60,
-    height=50,
+    width=70,
+    height=60,
     # corner_radius=100,
     image=clear_icon,
     command=delete_last_character,
 )
-clear_button.place(relx=0.7231, rely=0.3417, anchor="e")
+clear_button.place(relx=0.735, rely=0.362, anchor="e")
 
 call_icon = customtkinter.CTkImage(
     light_image=Image.open('Images/call_icon_light.png'),
@@ -969,11 +980,11 @@ call_button = customtkinter.CTkButton(
     master=digital_frame_page,
     text="",
     width=60,
-    height=50,
+    height=60,
     corner_radius=100,
     image=call_icon,
 )
-call_button.place(relx=0.5, rely=0.904, anchor="s")
+call_button.place(relx=0.5142, rely=0.897, anchor="s")
 
 #__________________________________________________________________________
 
