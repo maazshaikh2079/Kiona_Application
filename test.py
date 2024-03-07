@@ -148,3 +148,6 @@ for i, row in enumerate(image_texts):
         )
 
 root.mainloop()
+
+
+# Modify the above code so if news images are added to the `Visitor_Pictures` directory it should relflect in `visitor_picture_frame`
