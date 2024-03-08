@@ -1,0 +1,21 @@
+home_button1 - no visitor page
+home_button2 - video call page
+back_button1 - video call page
+
+
+home_button3 - alarm_page
+home_button4 - clock_page
+back_button2 - clock_page
+home_button5 - timer_page
+
+
+home_button6 - message_centre_page
+home_button7 - message_page
+back_button3 - message_page
+home_button8 - visitor_record_page
+back_button4 - visitor_record_page
+home_button9 - visitor_picture_page
+back_button5 - visitor_picture_page
+
+home_button10 - digital_frame_page
+

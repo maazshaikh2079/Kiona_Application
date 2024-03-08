@@ -23,10 +23,19 @@ def raise_page(page):
     page.tkraise()
     for p in [
         home_page,
+
+        no_visitor_page,
+        video_call_page,
+        
+        alarm_page,
+        clock_page,
+        timer_page,
+        
         message_centre_page,
         message_page,
         visitor_record_page,
         visitor_picture_page,
+        
         digital_frame_page
     ]:
         if p != page:
@@ -98,7 +107,7 @@ def change_appearance_mode():
             hover_color="darkgray",
         )
 
-        home_button3.configure(
+        home_button6.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -116,7 +125,7 @@ def change_appearance_mode():
             hover_color="darkgray",
         )
 
-        home_button4.configure(
+        home_button7.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -134,7 +143,7 @@ def change_appearance_mode():
             hover_color="darkgray",
         )
 
-        home_button5.configure(
+        home_button8.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -152,7 +161,7 @@ def change_appearance_mode():
             hover_color="darkgray",
         )
 
-        home_button6.configure(
+        home_button9.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -165,7 +174,7 @@ def change_appearance_mode():
                 hover_color="darkgray",
             )
 
-        home_button7.configure(
+        home_button10.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -238,7 +247,7 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
-        home_button3.configure(
+        home_button6.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -256,7 +265,7 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
-        home_button4.configure(
+        home_button7.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -274,7 +283,7 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
-        home_button5.configure(
+        home_button8.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -292,7 +301,7 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
-        home_button6.configure(
+        home_button9.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -305,7 +314,7 @@ def change_appearance_mode():
                 hover_color="#585858",
             )
 
-        home_button7.configure(
+        home_button10.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -334,18 +343,28 @@ def change_appearance_mode():
 
 
 # Pages & GUI Components:
-
+# Home Page
 home_page = customtkinter.CTkFrame(master=root)
 
+# Video Door Phone Page
+no_visitor_page = customtkinter.CTkFrame(master=root)
+video_call_page = customtkinter.CTkFrame(master=root)
+
+# Alarm Page
+alarm_page = customtkinter.CTkFrame(master=root)
+clock_page = customtkinter.CTkFrame(master=root)
+timer_page = customtkinter.CTkFrame(master=root)
+
+# Message Centre Page 
 message_centre_page = customtkinter.CTkFrame(master=root)
 message_page = customtkinter.CTkFrame(master=root)
 visitor_record_page = customtkinter.CTkFrame(master=root)
 visitor_picture_page = customtkinter.CTkFrame(master=root)
 
+# Digital Frame Page
 digital_frame_page = customtkinter.CTkFrame(master=root)
 
 #________________________________________________________________________
-
 
 # Home page GUI components:
 
@@ -574,7 +593,7 @@ back_icon = customtkinter.CTkImage(
 
 # Message centre page GUI components:
 
-home_button3 = customtkinter.CTkButton(
+home_button6 = customtkinter.CTkButton(
     master=message_centre_page,
     text="  Home             ",
     corner_radius=0,
@@ -586,7 +605,7 @@ home_button3 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button3.place(x=1059, y=100, anchor="center")
+home_button6.place(x=1059, y=100, anchor="center")
 
 message_centre_frame = customtkinter.CTkFrame(
     master=message_centre_page,
@@ -667,7 +686,7 @@ back_button1 = customtkinter.CTkButton(
 )
 back_button1.place(x=1059, y=100, anchor="center")
 
-home_button4 = customtkinter.CTkButton(
+home_button7 = customtkinter.CTkButton(
     master=message_page,
     text="  Home             ",
     corner_radius=0,
@@ -679,7 +698,7 @@ home_button4 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button4.place(x=1059, y=165, anchor="center")
+home_button7.place(x=1059, y=165, anchor="center")
 
 message_frame = customtkinter.CTkScrollableFrame(
     master=message_page,
@@ -709,7 +728,7 @@ back_button2 = customtkinter.CTkButton(
 )
 back_button2.place(x=1059, y=100, anchor="center")
 
-home_button5 = customtkinter.CTkButton(
+home_button8 = customtkinter.CTkButton(
     master=visitor_record_page,
     text="  Home             ",
     corner_radius=0,
@@ -721,7 +740,7 @@ home_button5 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button5.place(x=1059, y=165, anchor="center")
+home_button8.place(x=1059, y=165, anchor="center")
 
 visitor_record_frame = customtkinter.CTkScrollableFrame(
     master=visitor_record_page,
@@ -752,7 +771,7 @@ back_button3 = customtkinter.CTkButton(
 )
 back_button3.place(x=1059, y=100, anchor="center")
 
-home_button6 = customtkinter.CTkButton(
+home_button9 = customtkinter.CTkButton(
     master=visitor_picture_page,
     text="  Home             ",
     corner_radius=0,
@@ -764,7 +783,7 @@ home_button6 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button6.place(x=1059, y=165, anchor="center")
+home_button9.place(x=1059, y=165, anchor="center")
 
 
 # Function to create a new window with the clicked image
@@ -864,7 +883,7 @@ for i, row in enumerate(image_texts):
 
 # Digital Frame Page GUI components:
 
-home_button7 = customtkinter.CTkButton(
+home_button10 = customtkinter.CTkButton(
     master=digital_frame_page,
     text="  Home             ",
     corner_radius=0,
@@ -876,7 +895,7 @@ home_button7 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button7.place(x=1059, y=100, anchor="center")
+home_button10.place(x=1059, y=100, anchor="center")
 
 # Changed Colors:
 digital_frame = customtkinter.CTkFrame(
