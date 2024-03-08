@@ -107,7 +107,59 @@ def change_appearance_mode():
             hover_color="darkgray",
         )
 
-        home_button6.configure(
+        # Video Door Phone Page GUI Components:
+
+        # No Visitor Page GUI Components
+        home_button_nvp.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        # Video Call Page GUI Components
+        home_button_vcp.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        # Alarm Page GUI Components:
+        home_button_ap.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        # clock Page GUI Components:
+        home_button_cp.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        back_button_cp.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+
+        # Timer Page GUI Components:
+        home_button_tp.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        back_button_tp.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        # Message Center Page GUI Components:
+
+        home_button_mcp.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -119,13 +171,13 @@ def change_appearance_mode():
             hover_color="darkgray",
         )
 
-        back_button1.configure(
+        back_button_mp.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
         )
 
-        home_button7.configure(
+        home_button_mp.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -137,13 +189,13 @@ def change_appearance_mode():
             hover_color="darkgray",
         )
 
-        back_button2.configure(
+        back_button_vrp.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
         )
 
-        home_button8.configure(
+        home_button_vrp.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -155,13 +207,13 @@ def change_appearance_mode():
             hover_color="darkgray",
         )
 
-        back_button3.configure(
+        back_button_vpp.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
         )
 
-        home_button9.configure(
+        home_button_vpp.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -174,7 +226,9 @@ def change_appearance_mode():
                 hover_color="darkgray",
             )
 
-        home_button10.configure(
+        # Digital Frame Page GUI Compnents:
+
+        home_button_dfp.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -247,7 +301,59 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
-        home_button6.configure(
+       
+        # Video Door Phone Page GUI Components:
+
+        # No Visitor Page GUI Components
+        home_button_nvp.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        # Video Call Page GUI Components
+        home_button_vcp.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        # Alarm Page GUI Components:
+        home_button_ap.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        # clock Page GUI Components:
+        home_button_cp.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        back_button_cp.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        # Timer Page GUI Components:
+        home_button_tp.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+        
+        back_button_tp.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        # Message Center Page GUI Components:
+
+        home_button_mcp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -259,13 +365,13 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
-        back_button1.configure(
+        back_button_mp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
         )
 
-        home_button7.configure(
+        home_button_mp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -277,13 +383,13 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
-        back_button2.configure(
+        back_button_vrp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
         )
 
-        home_button8.configure(
+        home_button_vrp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -295,13 +401,13 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
-        back_button3.configure(
+        back_button_vpp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
         )
 
-        home_button9.configure(
+        home_button_vpp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -314,7 +420,9 @@ def change_appearance_mode():
                 hover_color="#585858",
             )
 
-        home_button10.configure(
+        # Digital Frame Page GUI Compnents:
+
+        home_button_dfp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -579,21 +687,44 @@ back_icon = customtkinter.CTkImage(
 
 # Video Door Phone Page GUI Components
 
+# No Visitor Page GUI Components
+home_button_nvp = customtkinter.CTkButton(
+    master=no_visitor_page,
+    text="  Home             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=home_icon,
+    compound="left",
+    command=lambda: raise_page(home_page)
+)
+home_button_nvp.place(x=1059, y=100, anchor="center")
+
+# Video Call Page GUI Components
+home_button_vcp = customtkinter.CTkButton(
+    master=video_call_page,
+    text="  Home             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=home_icon,
+    compound="left",
+    command=lambda: raise_page(home_page)
+)
+home_button_vcp.place(x=1059, y=100, anchor="center")
+
+
 
 #__________________________________________________________________________
 
 #__________________________________________________________________________
 
 # Alarm Page GUI Components
-
-
-#__________________________________________________________________________
-
-#__________________________________________________________________________
-
-# Message centre page GUI components:
-
-home_button6 = customtkinter.CTkButton(
+home_button_ap = customtkinter.CTkButton(
     master=message_centre_page,
     text="  Home             ",
     corner_radius=0,
@@ -605,7 +736,86 @@ home_button6 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button6.place(x=1059, y=100, anchor="center")
+home_button_ap.place(x=1059, y=100, anchor="center")
+
+# Clock Page GUI Components
+home_button_cp = customtkinter.CTkButton(
+    master=clock_page,
+    text="  Home             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=home_icon,
+    compound="left",
+    command=lambda: raise_page(home_page)
+)
+home_button_cp.place(x=1059, y=100, anchor="center")
+
+back_button_cp = customtkinter.CTkButton(
+    master=clock_page,
+    text="  Back             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=back_icon,
+    compound="left",
+    command=lambda: raise_page(alarm_page)
+)
+back_button_cp.place(x=1059, y=100, anchor="center")
+
+
+# Timer Page GUI Components
+home_button_tp = customtkinter.CTkButton(
+    master=timer_page,
+    text="  Home             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=home_icon,
+    compound="left",
+    command=lambda: raise_page(home_page)
+)
+home_button_tp.place(x=1059, y=100, anchor="center")
+
+back_button_tp = customtkinter.CTkButton(
+    master=timer_page,
+    text="  Back             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=back_icon,
+    compound="left",
+    command=lambda: raise_page(alarm_page)
+)
+back_button_tp.place(x=1059, y=100, anchor="center")
+
+#__________________________________________________________________________
+
+#__________________________________________________________________________
+
+# Message centre page GUI components:
+
+home_button_mcp = customtkinter.CTkButton(
+    master=message_centre_page,
+    text="  Home             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=home_icon,
+    compound="left",
+    command=lambda: raise_page(home_page)
+)
+home_button_mcp.place(x=1059, y=100, anchor="center")
 
 message_centre_frame = customtkinter.CTkFrame(
     master=message_centre_page,
@@ -671,7 +881,7 @@ visitor_picture_button.grid(row=0, column=2, pady=10, padx=25)
 # __________________________________________________________________________
 # Message page GUI Components:
 
-back_button1 = customtkinter.CTkButton(
+back_button_mp = customtkinter.CTkButton(
     master=message_page,
     text="  Back             ",
     corner_radius=0,
@@ -684,9 +894,9 @@ back_button1 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(message_centre_page)
 )
-back_button1.place(x=1059, y=100, anchor="center")
+back_button_mp.place(x=1059, y=100, anchor="center")
 
-home_button7 = customtkinter.CTkButton(
+home_button_mp = customtkinter.CTkButton(
     master=message_page,
     text="  Home             ",
     corner_radius=0,
@@ -698,7 +908,7 @@ home_button7 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button7.place(x=1059, y=165, anchor="center")
+home_button_mp.place(x=1059, y=165, anchor="center")
 
 message_frame = customtkinter.CTkScrollableFrame(
     master=message_page,
@@ -713,7 +923,7 @@ message_frame.pack(padx=50, pady=70, side="left")
 # __________________________________________________________________________
 # Visitor Records page GUI Components:
 
-back_button2 = customtkinter.CTkButton(
+back_button_vrp = customtkinter.CTkButton(
     master=visitor_record_page,
     text="  Back             ",
     corner_radius=0,
@@ -726,9 +936,9 @@ back_button2 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(message_centre_page)
 )
-back_button2.place(x=1059, y=100, anchor="center")
+back_button_vrp.place(x=1059, y=100, anchor="center")
 
-home_button8 = customtkinter.CTkButton(
+home_button_vrp = customtkinter.CTkButton(
     master=visitor_record_page,
     text="  Home             ",
     corner_radius=0,
@@ -740,7 +950,7 @@ home_button8 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button8.place(x=1059, y=165, anchor="center")
+home_button_vrp.place(x=1059, y=165, anchor="center")
 
 visitor_record_frame = customtkinter.CTkScrollableFrame(
     master=visitor_record_page,
@@ -756,7 +966,7 @@ visitor_record_frame.pack(padx=50, pady=70, side="left")
 # __________________________________________________________________________
 # Visitor Picture page GUI Components:
 
-back_button3 = customtkinter.CTkButton(
+back_button_vpp = customtkinter.CTkButton(
     master=visitor_picture_page,
     text="  Back             ",
     corner_radius=0,
@@ -769,9 +979,9 @@ back_button3 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(message_centre_page)
 )
-back_button3.place(x=1059, y=100, anchor="center")
+back_button_vpp.place(x=1059, y=100, anchor="center")
 
-home_button9 = customtkinter.CTkButton(
+home_button_vpp = customtkinter.CTkButton(
     master=visitor_picture_page,
     text="  Home             ",
     corner_radius=0,
@@ -783,7 +993,7 @@ home_button9 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button9.place(x=1059, y=165, anchor="center")
+home_button_vpp.place(x=1059, y=165, anchor="center")
 
 
 # Function to create a new window with the clicked image
@@ -883,7 +1093,7 @@ for i, row in enumerate(image_texts):
 
 # Digital Frame Page GUI components:
 
-home_button10 = customtkinter.CTkButton(
+home_button_dfp = customtkinter.CTkButton(
     master=digital_frame_page,
     text="  Home             ",
     corner_radius=0,
@@ -895,7 +1105,7 @@ home_button10 = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button10.place(x=1059, y=100, anchor="center")
+home_button_dfp.place(x=1059, y=100, anchor="center")
 
 # Changed Colors:
 digital_frame = customtkinter.CTkFrame(

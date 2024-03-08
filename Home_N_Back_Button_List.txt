@@ -1,0 +1,18 @@
+home_button1 - no visitor page - home_button_nvp
+home_button2 - video call page - home_button_vcp
+
+home_button3 - alarm_page - home_button_ap
+home_button4 - clock_page - home_button_cp
+back_button1 - clock_page - back_button_cp
+home_button5 - timer_page - home_button_tp
+back_button2 - timer_page - back_button_tp
+
+home_button6 - message_centre_page - home_button_mcp
+home_button7 - message_page - home_button_mp
+back_button3 - message_page - back_button_mp
+home_button8 - visitor_record_page - home_button_vrp
+back_button4 - visitor_record_page - back_button_vrp
+home_button9 - visitor_picture_page - home_button_vpp
+back_button5 - visitor_picture_page - back_button_vpp
+
+home_button10 - digital_frame_page - home_button_dfp
