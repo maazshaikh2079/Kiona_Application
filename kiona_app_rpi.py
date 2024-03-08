@@ -36,11 +36,10 @@ def raise_page(page):
         visitor_record_page,
         visitor_picture_page,
         
-        digital_frame_page
+        digital_frame_page,
     ]:
         if p != page:
             p.pack_forget()
-
 
 
 def update_realtime_labels():
@@ -448,6 +447,28 @@ def change_appearance_mode():
         )
 
         mode = "light"
+
+
+def change_appearance_mode_of_image_buttons():
+    global mode
+
+    if mode == "light":
+    
+        for button in image_buttons:
+            button.configure(
+                fg_color="#4B4B4B",
+                text_color="white",
+                hover_color="#585858",
+            )
+
+    elif mode == "dark":
+
+        for button in image_buttons:
+            button.configure(
+                fg_color="#B8B8B8",
+                text_color="#292929",
+                hover_color="darkgray",
+            )
 
 
 # Pages & GUI Components:
@@ -1030,64 +1051,76 @@ visitor_picture_frame.pack(padx=50, pady=70, side="left")
 # Pictures Directory
 visitor_pictures_directory_path = "Visitor_Pictures"
 
-# Get a list of all files in the directory
-files_in_directory = os.listdir(visitor_pictures_directory_path)
-
-# Filter out only the files with specific extensions (e.g., ".jpg")
-image_files = [file for file in files_in_directory if file.lower().endswith('.jpg')]
-
-# Format the file names into the desired structure
-image_texts = []
-row_size = 4  # Number of columns in each row
-for i in range(0, len(image_files), row_size):
-    row = image_files[i:i + row_size]
-    image_texts.append(row)
-
 # Image Buttons
 image_buttons = []
 
-for i, row in enumerate(image_texts):
-    for j, file_name in enumerate(row):
-        image_location = f"{visitor_pictures_directory_path}/{file_name}"
+def update_image_buttons():
 
-        image_ = Image.open(image_location)
+    # Get a list of all files in the directory
+    files_in_directory = os.listdir(visitor_pictures_directory_path)
 
-        image_original_size = image_.size
-        width, height = image_.size
+    # Filter out only the files with specific extensions (e.g., ".jpg")
+    image_files = [file for file in files_in_directory if file.lower().endswith('.jpg')]
 
-        iconified_image = customtkinter.CTkImage(
-            light_image=Image.open(image_location),
-            dark_image=Image.open(image_location),
-            size=(170, 120),
-        )
+    # Format the file names into the desired structure
+    image_texts = []
+    row_size = 4  # Number of columns in each row
+    for i in range(0, len(image_files), row_size):
+        row = image_files[i:i + row_size]
+        image_texts.append(row)
 
-        deiconified_image = customtkinter.CTkImage(
-            light_image=Image.open(image_location),
-            dark_image=Image.open(image_location),
-            size=image_original_size,
-            # size=(512, 400),
-            # size=(512, 300),
-        )
+    # Image Buttons
+    # image_buttons = []
 
-        button = customtkinter.CTkButton(
-            master=visitor_picture_frame,
-            text="",
-            font=("Segoe UI Semibold", 16),
-            width=181,
-            height=130,
-            corner_radius=2,
-            image=iconified_image,
-        )
-        button.grid(row=i + 1, column=j, pady=10, padx=15)
+    # Re-create the image buttons
+    for i, row in enumerate(image_texts):
+        for j, file_name in enumerate(row):
+            image_location = f"{visitor_pictures_directory_path}/{file_name}"
 
-        image_buttons.append(button)
+            image_ = Image.open(image_location)
 
-        # Set the command for each button to open the image in a new window
-        image_buttons[-1].configure(
-            command=lambda img=deiconified_image, w=width, h=height:
-            create_image_window(img, w, h),
-        )
+            image_original_size = image_.size
+            width, height = image_.size
 
+            iconified_image = customtkinter.CTkImage(
+                light_image=Image.open(image_location),
+                dark_image=Image.open(image_location),
+                size=(170, 120),
+            )
+
+            deiconified_image = customtkinter.CTkImage(
+                light_image=Image.open(image_location),
+                dark_image=Image.open(image_location),
+                size=image_original_size,
+                # size=(512, 400),
+                # size=(512, 300),
+            )
+
+            button = customtkinter.CTkButton(
+                master=visitor_picture_frame,
+                text="",
+                font=("Segoe UI Semibold", 16),
+                width=181,
+                height=130,
+                corner_radius=2,
+                image=iconified_image,
+            )
+            button.grid(row=i + 1, column=j, pady=10, padx=15)
+
+            image_buttons.append(button)
+
+            # Set the command for each button to open the image in a new window
+            image_buttons[-1].configure(
+                command=lambda img=deiconified_image, w=width, h=height:
+                create_image_window(img, w, h),
+            )
+
+    change_appearance_mode_of_image_buttons()
+    # Schedule the next update
+    root.after(5000, update_image_buttons)  # Update every 5 seconds. Might be buggy
+
+# Call the update function for the first time
+update_image_buttons()
 
 #__________________________________________________________________________
 
