@@ -3,7 +3,7 @@ from PIL import Image
 import datetime
 import os
 
-mode = "dark"
+mode = "light"
 
 customtkinter.set_appearance_mode(mode)
 customtkinter.set_default_color_theme("dark-blue")
@@ -25,7 +25,7 @@ def raise_page(page):
         home_page,
 
         no_visitor_page,
-        video_call_page,
+        video_door_phone_page,
         
         alarm_page,
         clock_page,
@@ -108,15 +108,39 @@ def change_appearance_mode():
 
         # Video Door Phone Page GUI Components:
 
-        # No Visitor Page GUI Components
-        home_button_nvp.configure(
+        start_stream_button.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
         )
 
-        # Video Call Page GUI Components
-        home_button_vcp.configure(
+        freeze_stream_button.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        take_a_pic_button.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+
+        stop_stream_button.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        home_button_vdpp.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        # No Visitor Page GUI Components
+        home_button_nvp.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -141,7 +165,6 @@ def change_appearance_mode():
             text_color="#292929",
             hover_color="darkgray",
         )
-
 
         # Timer Page GUI Components:
         home_button_tp.configure(
@@ -300,18 +323,39 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
-       
         # Video Door Phone Page GUI Components:
-
-        # No Visitor Page GUI Components
-        home_button_nvp.configure(
+        start_stream_button.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
         )
 
-        # Video Call Page GUI Components
-        home_button_vcp.configure(
+        freeze_stream_button.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        take_a_pic_button.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        stop_stream_button.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        home_button_vdpp.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        # No Visitor Page GUI Components
+        home_button_nvp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -477,7 +521,7 @@ home_page = customtkinter.CTkFrame(master=root)
 
 # Video Door Phone Page
 no_visitor_page = customtkinter.CTkFrame(master=root)
-video_call_page = customtkinter.CTkFrame(master=root)
+video_door_phone_page = customtkinter.CTkFrame(master=root)
 
 # Alarm Page
 alarm_page = customtkinter.CTkFrame(master=root)
@@ -628,6 +672,7 @@ video_door_phone_button = customtkinter.CTkButton(
     bg_color="black",
     image=video_door_phone_icon,
     compound="left",
+    command=lambda: raise_page(video_door_phone_page)
 )
 video_door_phone_button.place(x=1059, y=100, anchor="center")
 
@@ -647,6 +692,7 @@ alarm_button = customtkinter.CTkButton(
     bg_color="black",
     image=alarm_icon,
     compound="left",
+    command=lambda: raise_page(alarm_page)
 )
 alarm_button.place(x=1059, y=165, anchor="center")
 
@@ -706,9 +752,118 @@ back_icon = customtkinter.CTkImage(
 
 #__________________________________________________________________________
 
-# Video Door Phone Page GUI Components
+# Video Door Phone Page GUI Components:
 
-# No Visitor Page GUI Components
+start_stream_icon = customtkinter.CTkImage(
+    light_image=Image.open('Images/start_icon_dark2.png'),
+    dark_image=Image.open('Images/start_icon_light2.png'),
+    size=(48, 48),
+)
+
+start_stream_button = customtkinter.CTkButton(
+    master=video_door_phone_page,
+    text="   Start               ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=start_stream_icon,
+    compound="left",
+    # command=lambda: raise_page(home_page)
+)
+start_stream_button.place(x=1059, y=100, anchor="center")
+
+freeze_stream_icon = customtkinter.CTkImage(
+    light_image=Image.open('Images/freeze_icon_dark2.png'),
+    dark_image=Image.open('Images/freeze_icon_light2.png'),
+    size=(48, 48),
+)
+
+freeze_stream_button = customtkinter.CTkButton(
+    master=video_door_phone_page,
+    text="  Freeze            ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=freeze_stream_icon,
+    compound="left",
+    # command=lambda: raise_page(home_page)
+)
+freeze_stream_button.place(x=1059, y=165, anchor="center")
+
+take_a_pic_icon = customtkinter.CTkImage(
+    light_image=Image.open('Images/take_pic_icon_dark2.png'),
+    dark_image=Image.open('Images/take_pic_icon_light2.png'),
+    size=(48, 48),
+)
+
+take_a_pic_button = customtkinter.CTkButton(
+    master=video_door_phone_page,
+    text=" Take a pic        ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=take_a_pic_icon,
+    compound="left",
+    # command=lambda: raise_page(home_page)
+)
+take_a_pic_button.place(x=1059, y=230, anchor="center")
+
+stop_stream_icon = customtkinter.CTkImage(
+    light_image=Image.open('Images/stop_icon_dark2.png'),
+    dark_image=Image.open('Images/stop_icon_light2.png'),
+    size=(48, 48),
+)
+
+stop_stream_button = customtkinter.CTkButton(
+    master=video_door_phone_page,
+    text="   Stop              ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=stop_stream_icon,
+    compound="left",
+    # command=lambda: raise_page(home_page)
+)
+stop_stream_button.place(x=1059, y=295, anchor="center")
+
+home_button_vdpp = customtkinter.CTkButton(
+    master=video_door_phone_page,
+    text="  Home             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=home_icon,
+    compound="left",
+    command=lambda: raise_page(home_page)
+)
+home_button_vdpp.place(x=1059, y=360, anchor="center")
+
+video_stream_frame = customtkinter.CTkFrame(
+    master=video_door_phone_page,
+    # label_text="Notices",
+    # label_font=("Segoe UI Semibold", 18),
+    # label_anchor="center",
+    width=845,
+    height=645,
+)
+video_stream_frame.pack(padx=50, pady=70, side="left")
+
+
+
+# __________________________________________________________________________
+
+# No Visitor Page GUI Components:
+
 home_button_nvp = customtkinter.CTkButton(
     master=no_visitor_page,
     text="  Home             ",
@@ -723,22 +878,6 @@ home_button_nvp = customtkinter.CTkButton(
 )
 home_button_nvp.place(x=1059, y=100, anchor="center")
 
-# Video Call Page GUI Components
-home_button_vcp = customtkinter.CTkButton(
-    master=video_call_page,
-    text="  Home             ",
-    corner_radius=0,
-    height=50,
-    width=189,
-    font=("Segoe UI Semibold", 16),
-    bg_color="black",
-    image=home_icon,
-    compound="left",
-    command=lambda: raise_page(home_page)
-)
-home_button_vcp.place(x=1059, y=100, anchor="center")
-
-
 
 #__________________________________________________________________________
 
@@ -746,7 +885,7 @@ home_button_vcp.place(x=1059, y=100, anchor="center")
 
 # Alarm Page GUI Components
 home_button_ap = customtkinter.CTkButton(
-    master=message_centre_page,
+    master=alarm_page,
     text="  Home             ",
     corner_radius=0,
     height=50,
@@ -760,20 +899,6 @@ home_button_ap = customtkinter.CTkButton(
 home_button_ap.place(x=1059, y=100, anchor="center")
 
 # Clock Page GUI Components
-home_button_cp = customtkinter.CTkButton(
-    master=clock_page,
-    text="  Home             ",
-    corner_radius=0,
-    height=50,
-    width=189,
-    font=("Segoe UI Semibold", 16),
-    bg_color="black",
-    image=home_icon,
-    compound="left",
-    command=lambda: raise_page(home_page)
-)
-home_button_cp.place(x=1059, y=100, anchor="center")
-
 back_button_cp = customtkinter.CTkButton(
     master=clock_page,
     text="  Back             ",
@@ -788,10 +913,8 @@ back_button_cp = customtkinter.CTkButton(
 )
 back_button_cp.place(x=1059, y=100, anchor="center")
 
-
-# Timer Page GUI Components
-home_button_tp = customtkinter.CTkButton(
-    master=timer_page,
+home_button_cp = customtkinter.CTkButton(
+    master=clock_page,
     text="  Home             ",
     corner_radius=0,
     height=50,
@@ -802,8 +925,9 @@ home_button_tp = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button_tp.place(x=1059, y=100, anchor="center")
+home_button_cp.place(x=1059, y=165, anchor="center")
 
+# Timer Page GUI Components
 back_button_tp = customtkinter.CTkButton(
     master=timer_page,
     text="  Back             ",
@@ -817,6 +941,20 @@ back_button_tp = customtkinter.CTkButton(
     command=lambda: raise_page(alarm_page)
 )
 back_button_tp.place(x=1059, y=100, anchor="center")
+
+home_button_tp = customtkinter.CTkButton(
+    master=timer_page,
+    text="  Home             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=home_icon,
+    compound="left",
+    command=lambda: raise_page(home_page)
+)
+home_button_tp.place(x=1059, y=165, anchor="center")
 
 #__________________________________________________________________________
 
@@ -908,7 +1046,6 @@ back_button_mp = customtkinter.CTkButton(
     corner_radius=0,
     height=50,
     width=189,
-#    width=186,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=back_icon,
@@ -1117,7 +1254,7 @@ def update_image_buttons():
 
     change_appearance_mode_of_image_buttons()
     # Schedule the next update
-    root.after(5000, update_image_buttons)  # Update every 5 seconds. Might be buggy
+    root.after(10000, update_image_buttons)  # Update every 5 seconds. Might be buggy
 
 # Call the update function for the first time
 update_image_buttons()
