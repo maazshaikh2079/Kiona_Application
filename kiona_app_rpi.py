@@ -1,6 +1,8 @@
 import customtkinter
-from PIL import Image
+import cv2
+from PIL import Image, ImageTk
 import datetime
+import time
 import os
 
 mode = "light"
@@ -137,6 +139,10 @@ def change_appearance_mode():
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
+        )
+
+        video_stream_canvas.configure(
+            bg="#d9d9d9",
         )
 
         # No Visitor Page GUI Components
@@ -352,6 +358,10 @@ def change_appearance_mode():
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
+        )
+
+        video_stream_canvas.configure(
+            bg="#292929",
         )
 
         # No Visitor Page GUI Components
@@ -754,6 +764,81 @@ back_icon = customtkinter.CTkImage(
 
 # Video Door Phone Page GUI Components:
 
+# Initialize video capture
+video_capture = cv2.VideoCapture(0)
+is_capturing = False  # Flag to control video capturing
+current_image = None
+
+# add `video_stream_frame` if needed
+
+video_stream_canvas = customtkinter.CTkCanvas(
+    master=video_door_phone_page,
+    width=1065,
+    height=802,
+    bg="#d9d9d9",  # light mode
+    # bg="#292929", # dark mode
+)
+video_stream_canvas.pack(padx=50, pady=70, side="left")
+
+# Function definitions
+def start_stream():
+   
+    global is_capturing
+    global video_capture
+
+    video_capture = cv2.VideoCapture(0)
+    is_capturing = True
+   
+    update_webcam()
+
+
+def freeze_stream():
+   
+    global is_capturing
+   
+    is_capturing = False
+
+
+def take_a_pic():
+    
+    if is_capturing and current_image:
+        current_image.save(f'Visitor_Pictures/selfie_{int(time.time())}.jpg')
+
+
+def stop_stream():
+    
+    global is_capturing
+    global current_image
+
+    is_capturing = False
+    current_image = None
+    
+    video_stream_canvas.delete("all")  # Clear the canvas
+    # Release the video capture object
+    video_capture.release()
+    # Destroy all OpenCV windows
+    cv2.destroyAllWindows()
+
+
+def update_webcam():
+
+    global current_image
+    
+    if is_capturing:
+        ret, video_frame = video_capture.read()
+    
+        if ret:
+            video_frame = cv2.resize(video_frame, (1085, 802))
+            current_image = Image.fromarray(cv2.cvtColor(video_frame, cv2.COLOR_BGR2RGB))
+            photo = ImageTk.PhotoImage(image=current_image)
+            video_stream_canvas.create_image(0, 0, image=photo, anchor=customtkinter.NW)
+            video_stream_canvas.image = photo
+            root.after(15, update_webcam)
+    
+        else:
+            print("Failed to capture frame from webcam. Check webcam index.")
+
+
 start_stream_icon = customtkinter.CTkImage(
     light_image=Image.open('Images/start_icon_dark2.png'),
     dark_image=Image.open('Images/start_icon_light2.png'),
@@ -770,7 +855,7 @@ start_stream_button = customtkinter.CTkButton(
     bg_color="black",
     image=start_stream_icon,
     compound="left",
-    # command=lambda: raise_page(home_page)
+    command=start_stream,
 )
 start_stream_button.place(x=1059, y=100, anchor="center")
 
@@ -790,7 +875,7 @@ freeze_stream_button = customtkinter.CTkButton(
     bg_color="black",
     image=freeze_stream_icon,
     compound="left",
-    # command=lambda: raise_page(home_page)
+    command=freeze_stream,
 )
 freeze_stream_button.place(x=1059, y=165, anchor="center")
 
@@ -810,7 +895,7 @@ take_a_pic_button = customtkinter.CTkButton(
     bg_color="black",
     image=take_a_pic_icon,
     compound="left",
-    # command=lambda: raise_page(home_page)
+    command=take_a_pic,
 )
 take_a_pic_button.place(x=1059, y=230, anchor="center")
 
@@ -830,7 +915,7 @@ stop_stream_button = customtkinter.CTkButton(
     bg_color="black",
     image=stop_stream_icon,
     compound="left",
-    # command=lambda: raise_page(home_page)
+    command=stop_stream,
 )
 stop_stream_button.place(x=1059, y=295, anchor="center")
 
@@ -847,16 +932,6 @@ home_button_vdpp = customtkinter.CTkButton(
     command=lambda: raise_page(home_page)
 )
 home_button_vdpp.place(x=1059, y=360, anchor="center")
-
-video_stream_frame = customtkinter.CTkFrame(
-    master=video_door_phone_page,
-    # label_text="Notices",
-    # label_font=("Segoe UI Semibold", 18),
-    # label_anchor="center",
-    width=845,
-    height=645,
-)
-video_stream_frame.pack(padx=50, pady=70, side="left")
 
 
 
@@ -1037,6 +1112,7 @@ visitor_picture_button = customtkinter.CTkButton(
 )
 visitor_picture_button.grid(row=0, column=2, pady=10, padx=25)
 
+
 # __________________________________________________________________________
 # Message page GUI Components:
 
@@ -1077,6 +1153,7 @@ message_frame = customtkinter.CTkScrollableFrame(
     height=600,
 )
 message_frame.pack(padx=50, pady=70, side="left")
+
 
 # __________________________________________________________________________
 # Visitor Records page GUI Components:
@@ -1389,11 +1466,6 @@ call_button.place(relx=0.5142, rely=0.897, anchor="s")
 
 #__________________________________________________________________________
 
-#
-
-
-
-#__________________________________________________________________________
 
 # Function calls:
 
