@@ -1291,8 +1291,6 @@ home_button_cp = customtkinter.CTkButton(
 )
 home_button_cp.place(x=1059, y=165, anchor="center")
 
-# Here ->
-
 # Flag to control the alarm thread
 alarm_on = False
 pygame.mixer.init()
