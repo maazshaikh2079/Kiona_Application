@@ -3,6 +3,9 @@ import cv2
 from PIL import Image, ImageTk
 import datetime
 import time
+from threading import Thread
+import pygame
+import CTkMessagebox
 import os
 
 mode = "light"
@@ -21,6 +24,9 @@ root.geometry(f"{screen_width}x{screen_height}")
 
 # Functions:
 def raise_page(page):
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
+
     page.pack(fill='both', expand=True)
     page.tkraise()
     for p in [
@@ -62,6 +68,9 @@ def update_realtime_labels():
 
 
 def change_appearance_mode():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
+
     global mode
 
     if mode == "light":
@@ -159,6 +168,18 @@ def change_appearance_mode():
             hover_color="darkgray",
         )
 
+        clock_button.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        timer_button.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
         # clock Page GUI Components:
         home_button_cp.configure(
             fg_color="#B8B8B8",
@@ -168,6 +189,60 @@ def change_appearance_mode():
 
         back_button_cp.configure(
             fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        hour_label.configure(
+            # fg_color="#d9d9d9",
+            fg_color="#e5e5e5",
+            text_color="#292929",
+        )
+
+        hour_optionmenu.configure(
+            # fg_color="#d9d9d9",
+            fg_color="#e5e5e5",
+            text_color="#292929",
+            button_color="#b8b8b8",
+            button_hover_color="darkgray",
+        )
+
+        minute_label.configure(
+            # fg_color="#d9d9d9",
+            fg_color="#e5e5e5",
+            text_color="#292929",
+        )
+
+        minute_optionmenu.configure(
+            # fg_color="#d9d9d9",
+            fg_color="#e5e5e5",
+            text_color="#292929",
+            button_color="#b8b8b8",
+            button_hover_color="darkgray",
+        )
+
+        am_pm_label.configure(
+            # fg_color="#d9d9d9",
+            fg_color="#e5e5e5",
+            text_color="#292929",
+        )
+
+        am_pm_optionmenu.configure(
+            # fg_color="#d9d9d9",
+            fg_color="#e5e5e5",
+            text_color="#292929",
+            button_color="#b8b8b8",
+            button_hover_color="darkgray",
+        )
+
+        set_alarm_button.configure(
+            fg_color="#b8b8b8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        cancel_alarm_button.configure(
+            fg_color="#b8b8b8",
             text_color="#292929",
             hover_color="darkgray",
         )
@@ -184,6 +259,55 @@ def change_appearance_mode():
             text_color="#292929",
             hover_color="darkgray",
         )
+
+        hours_label.configure(
+            fg_color="#e5e5e5",
+            text_color="#292929",
+        )
+
+        hours_optionmenu.configure(
+            fg_color="#e5e5e5",
+            text_color="#292929",
+            button_color="#b8b8b8",
+            button_hover_color="darkgray",
+        )
+
+        minutes_label.configure(
+            fg_color="#e5e5e5",
+            text_color="#292929",
+        )
+
+        minutes_optionmenu.configure(
+            fg_color="#e5e5e5",
+            text_color="#292929",
+            button_color="#b8b8b8",
+            button_hover_color="darkgray",
+        )
+
+        seconds_label.configure(
+            fg_color="#e5e5e5",
+            text_color="#292929",
+        )
+
+        seconds_optionmenu.configure(
+            fg_color="#e5e5e5",
+            text_color="#292929",
+            button_color="#b8b8b8",
+            button_hover_color="darkgray",
+        )
+
+        start_timer_button.configure(
+            fg_color="#b8b8b8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        stop_timer_button.configure(
+            fg_color="#b8b8b8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )      
+
 
         # Message Center Page GUI Components:
 
@@ -378,14 +502,83 @@ def change_appearance_mode():
             hover_color="#585858",
         )
 
+        clock_button.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        timer_button.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
         # clock Page GUI Components:
         home_button_cp.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
         )
+        #         back_button_cp.configure(
+        #     fg_color="#212121",
+        #     text_color="white",
+        #     hover_color="#585858",
+        #     button_color="#4B4B4B",
+        #     button_hover_color="#23201a",
+        # )
 
         back_button_cp.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        hour_label.configure(
+            fg_color="#212121",
+            text_color="white",
+        )
+
+        hour_optionmenu.configure(
+            fg_color="#212121",
+            text_color="white",
+            button_color="#4B4B4B",
+            button_hover_color="#585858",
+            # button_hover_color="#4B4B4B",
+        )
+
+        minute_label.configure(
+            fg_color="#212121",
+            text_color="white",
+        )
+
+        minute_optionmenu.configure(
+            fg_color="#212121",
+            text_color="white",
+            button_color="#4B4B4B",
+            button_hover_color="#585858",
+        )
+
+        am_pm_label.configure(
+            fg_color="#212121",
+            text_color="white",
+        )
+
+        am_pm_optionmenu.configure(
+            fg_color="#212121",
+            text_color="white",
+            button_color="#4B4B4B",
+            button_hover_color="#585858",
+        )
+
+
+        set_alarm_button.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        cancel_alarm_button.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -403,6 +596,54 @@ def change_appearance_mode():
             text_color="white",
             hover_color="#585858",
         )
+
+        hours_label.configure(
+            fg_color="#212121",
+            text_color="white",
+        )
+
+        hours_optionmenu.configure(
+            fg_color="#212121",
+            text_color="white",
+            button_color="#4B4B4B",
+            button_hover_color="#585858",
+        )
+
+        minutes_label.configure(
+            fg_color="#212121",
+            text_color="white",
+        )
+
+        minutes_optionmenu.configure(
+            fg_color="#212121",
+            text_color="white",
+            button_color="#4B4B4B",
+            button_hover_color="#585858",
+        )
+
+        seconds_label.configure(
+            fg_color="#212121",
+            text_color="white",
+        )
+
+        seconds_optionmenu.configure(
+            fg_color="#212121",
+            text_color="white",
+            button_color="#4B4B4B",
+            button_hover_color="#585858",
+        )
+
+        start_timer_button.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        stop_timer_button.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )      
 
         # Message Center Page GUI Components:
 
@@ -501,7 +742,6 @@ def change_appearance_mode():
         )
 
         mode = "light"
-
 
 def change_appearance_mode_of_image_buttons():
     global mode
@@ -782,6 +1022,8 @@ video_stream_canvas.pack(padx=50, pady=70, side="left")
 
 # Function definitions
 def start_stream():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
    
     global is_capturing
     global video_capture
@@ -793,6 +1035,8 @@ def start_stream():
 
 
 def freeze_stream():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
    
     global is_capturing
    
@@ -800,12 +1044,16 @@ def freeze_stream():
 
 
 def take_a_pic():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
     
     if is_capturing and current_image:
         current_image.save(f'Visitor_Pictures/selfie_{int(time.time())}.jpg')
 
 
 def stop_stream():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
     
     global is_capturing
     global current_image
@@ -933,8 +1181,6 @@ home_button_vdpp = customtkinter.CTkButton(
 )
 home_button_vdpp.place(x=1059, y=360, anchor="center")
 
-
-
 # __________________________________________________________________________
 
 # No Visitor Page GUI Components:
@@ -953,9 +1199,6 @@ home_button_nvp = customtkinter.CTkButton(
 )
 home_button_nvp.place(x=1059, y=100, anchor="center")
 
-
-#__________________________________________________________________________
-
 #__________________________________________________________________________
 
 # Alarm Page GUI Components
@@ -972,6 +1215,52 @@ home_button_ap = customtkinter.CTkButton(
     command=lambda: raise_page(home_page)
 )
 home_button_ap.place(x=1059, y=100, anchor="center")
+
+buttons_frame_ap = customtkinter.CTkFrame(
+    master=alarm_page,
+    fg_color="transparent",
+    bg_color="transparent",
+)
+buttons_frame_ap.pack(pady=320)
+
+clock_icon = customtkinter.CTkImage(
+    light_image=Image.open("Images/clock_icon_dark.png"),
+    dark_image=Image.open("Images/clock_icon_light.png"),
+    size=(58, 58),
+)
+
+clock_button = customtkinter.CTkButton(
+    master=buttons_frame_ap,
+    width=170,
+    height=130,
+    text="Clock",
+    font=("Segoe UI Semibold", 16),
+    image=clock_icon,
+    compound="top",
+    command=lambda: raise_page(clock_page),
+)
+clock_button.grid(row=0, column=0, pady=10, padx=25)
+
+timer_icon = customtkinter.CTkImage(
+    light_image=Image.open("Images/timer_icon_dark.png"),
+    dark_image=Image.open("Images/timer_icon_light.png"),
+    size=(58, 58),
+    # size=(70, 70),
+)
+
+timer_button = customtkinter.CTkButton(
+    master=buttons_frame_ap,
+    width=170,
+    height=130,
+    text="Timer",
+    font=("Segoe UI Semibold", 16),
+    image=timer_icon,
+    compound="top",
+    command=lambda: raise_page(timer_page),
+)
+timer_button.grid(row=0, column=1, pady=10, padx=25)
+
+#__________________________________________________________________________
 
 # Clock Page GUI Components
 back_button_cp = customtkinter.CTkButton(
@@ -1002,7 +1291,188 @@ home_button_cp = customtkinter.CTkButton(
 )
 home_button_cp.place(x=1059, y=165, anchor="center")
 
+# Here ->
+
+# Flag to control the alarm thread
+alarm_on = False
+pygame.mixer.init()
+
+alarm_clock_frame = customtkinter.CTkFrame(
+    clock_page,
+    # width=400,
+    # height=350,
+    # fg_color="transparent",
+    # bg_color="transparent",
+)
+alarm_clock_frame.pack(pady=305)
+
+# Create time selection labels and optionmenus
+hour_label = customtkinter.CTkLabel(
+    alarm_clock_frame, 
+    text="Hour",
+    font=("Segoe UI Semibold", 16),
+    fg_color="lightblue",
+    width=140,
+    height=35,
+    corner_radius=6,
+)
+hour_label.grid(row=0, column=0, padx=15, pady=10)
+# Adjust the hour range for 12-hour format
+hour_optionmenu = customtkinter.CTkOptionMenu(
+    alarm_clock_frame, 
+    values=[f"{i:02d}" for i in range(1, 13)],
+    font=("Segoe UI Semibold", 16),
+    height=35,
+    anchor="center",
+)
+hour_optionmenu.grid(row=0, column=1, padx=15, pady=10)
+
+minute_label = customtkinter.CTkLabel(
+    alarm_clock_frame, 
+    text="Minute",
+    font=("Segoe UI Semibold", 16),
+    fg_color="lightblue",
+    width=140,
+    height=35,
+    corner_radius=6,
+)
+minute_label.grid(row=1, column=0, padx=15, pady=10)
+minute_optionmenu = customtkinter.CTkOptionMenu(
+    alarm_clock_frame, 
+    values=[f"{i:02d}" for i in range(60)],
+    font=("Segoe UI Semibold", 16),
+    anchor="center",
+    height=35,
+)
+minute_optionmenu.grid(row=1, column=1, padx=15, pady=10)
+
+# Add AM/PM option
+am_pm_label = customtkinter.CTkLabel(
+    alarm_clock_frame, 
+    text="AM / PM",
+    font=("Segoe UI Semibold", 16),
+    fg_color="lightblue",
+    width=140,
+    height=35,
+    corner_radius=6,
+)
+am_pm_label.grid(row=2, column=0,  padx=15, pady=10)
+am_pm_optionmenu = customtkinter.CTkOptionMenu(
+    alarm_clock_frame, 
+    values=["AM", "PM"],
+    font=("Segoe UI Semibold", 16),
+    anchor="center",
+    height=35,
+)
+am_pm_optionmenu.grid(row=2, column=1, padx=15, pady=10)
+
+# Function to run the alarm in a separate thread
+def threading():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
+
+    global alarm_on
+    alarm_on = True
+    
+    set_alarm_button.configure(state="disabled")  # Disable the set alarm button
+    hour_optionmenu.configure(state="disabled")
+    minute_optionmenu.configure(state="disabled")
+    am_pm_optionmenu.configure(state="disabled")
+
+    thrd = Thread(target=alarm)
+    thrd.start()
+
+
+# Function to set the alarm
+def alarm():
+    global alarm_on
+    set_alarm_time = f"{hour_optionmenu.get()}:{minute_optionmenu.get()} {am_pm_optionmenu.get()}"
+    while alarm_on:
+        time.sleep(1)
+        # Use %I for 12-hour format and %p for AM/PM
+        current_time = datetime.datetime.now().strftime("%I:%M %p")
+        if current_time == set_alarm_time:
+            print("Alarm")
+            
+            pygame.mixer.music.load('Sounds/tone.mp3')
+            pygame.mixer.music.play()
+
+            if mode == "light":
+                alarm_messagebox = CTkMessagebox.CTkMessagebox(
+                    title="Clock",
+                    icon="warning",
+                    message="Alarm",
+                    font=("Segoe UI Semibold", 16), 
+                    option_1="Stop",
+                    button_text_color="white",
+                    button_color="#4B4B4B",
+                    button_hover_color="#585858",
+                )
+
+            elif mode == "dark":
+                alarm_messagebox = CTkMessagebox.CTkMessagebox(
+                    title="Clock",
+                    icon="warning",
+                    message="Alarm",
+                    font=("Segoe UI Semibold", 16), 
+                    option_1="Stop",
+                    button_text_color="#292929",
+                    button_color="#b8b8b8",
+                    button_hover_color="darkgray",
+                )
+            
+            if alarm_messagebox.get() == 'Stop':
+                pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+                pygame.mixer.music.play()
+                pygame.mixer.music.stop()
+            
+            set_alarm_button.configure(state="normal")  # Enable the set alarm button
+            hour_optionmenu.configure(state="normal")
+            minute_optionmenu.configure(state="normal")
+            am_pm_optionmenu.configure(state="normal")
+
+            break
+
+
+# Function to cancel the alarm
+def cancel_alarm():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
+
+    global alarm_on
+    alarm_on = False
+
+    set_alarm_button.configure(state="normal")  # Enable the set alarm button
+    hour_optionmenu.configure(state="normal")
+    minute_optionmenu.configure(state="normal")
+    am_pm_optionmenu.configure(state="normal")
+
+
+# Create set alarm button
+set_alarm_button = customtkinter.CTkButton(
+    alarm_clock_frame,
+    text="Set Alarm",
+    font=("Segoe UI Semibold", 16), 
+    height=35,
+    command=threading,
+)
+set_alarm_button.grid(row=3, column=0, padx=15, pady=20)
+
+# Create cancel alarm button
+cancel_alarm_button = customtkinter.CTkButton(
+    alarm_clock_frame, 
+    text="Cancel Alarm",
+    font=("Segoe UI Semibold", 16),
+    height=35, 
+    command=cancel_alarm,
+)
+cancel_alarm_button.grid(row=3, column=1, padx=15, pady=20)
+
+
+#__________________________________________________________________________
+
 # Timer Page GUI Components
+
 back_button_tp = customtkinter.CTkButton(
     master=timer_page,
     text="  Back             ",
@@ -1031,7 +1501,177 @@ home_button_tp = customtkinter.CTkButton(
 )
 home_button_tp.place(x=1059, y=165, anchor="center")
 
-#__________________________________________________________________________
+
+timer_frame = customtkinter.CTkFrame(
+    timer_page,
+    width=400,
+    height=350,
+    # fg_color="transparent",
+    # bg_color="transparent",
+)
+timer_frame.pack(pady=305)
+
+# Create time selection labels and optionmenus for the timer duration
+hours_label = customtkinter.CTkLabel(
+    timer_frame, 
+    text="Hours",
+    fg_color="lightblue",
+    font=("Segoe UI Semibold", 16),
+    height=35, 
+    width=140,
+    corner_radius=6,
+)
+hours_label.grid(row=0, column=0, padx=15, pady=10)
+hours_optionmenu = customtkinter.CTkOptionMenu(
+    timer_frame, 
+    values=[f"{i:02d}" for i in range(24)], 
+    font=("Segoe UI Semibold", 16),
+    height=35, 
+    anchor="center",
+)
+hours_optionmenu.grid(row=0, column=1, padx=15, pady=10)
+
+minutes_label = customtkinter.CTkLabel(
+    timer_frame, 
+    text="Minutes",
+    fg_color="lightblue",
+    font=("Segoe UI Semibold", 16),
+    height=35, 
+    width=140,
+    corner_radius=6,
+)
+minutes_label.grid(row=1, column=0, padx=15, pady=10)
+minutes_optionmenu = customtkinter.CTkOptionMenu(
+    timer_frame, 
+    values=[f"{i:02d}" for i in range(60)],
+    font=("Segoe UI Semibold", 16),
+    height=35, 
+    anchor="center",
+)
+minutes_optionmenu.grid(row=1, column=1, padx=15, pady=10)
+
+seconds_label = customtkinter.CTkLabel(
+    timer_frame, 
+    text="Seconds",
+    font=("Segoe UI Semibold", 16),
+    height=35, 
+    fg_color="lightblue",
+    width=140,
+    corner_radius=6,
+)
+seconds_label.grid(row=2, column=0,  padx=15, pady=10)
+seconds_optionmenu = customtkinter.CTkOptionMenu(
+    timer_frame, 
+    values=[f"{i:02d}" for i in range(60)], 
+    anchor="center",
+    font=("Segoe UI Semibold", 16),
+    height=35, 
+)
+seconds_optionmenu.grid(row=2, column=1, padx=15, pady=10)
+
+# Function to run the timer in a separate thread
+def start_timer():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
+    
+    global timer_on
+    timer_on = True
+    
+    start_timer_button.configure(state="disabled")  # Disable the start button
+    hours_optionmenu.configure(state="disabled")
+    minutes_optionmenu.configure(state="disabled")
+    seconds_optionmenu.configure(state="disabled")
+    
+    thrd = Thread(target=timer)
+    thrd.start()
+
+
+# Function for the timer countdown
+def timer():
+    global timer_on
+    total_seconds = int(hours_optionmenu.get()) * 3600 + int(minutes_optionmenu.get()) * 60 + int(seconds_optionmenu.get())
+    while total_seconds > 0 and timer_on:
+        time.sleep(1)
+        total_seconds -= 1
+        # Update the timer display with the new time
+        mins, secs = divmod(total_seconds, 60)
+        hours, mins = divmod(mins, 60)
+        time_format = f"{hours:02d}:{mins:02d}:{secs:02d}"
+        print(time_format)  # Or update a label/text widget to display the countdown
+
+    if total_seconds == 0:
+        pygame.mixer.music.load('Sounds/tone.mp3')
+        pygame.mixer.music.play()
+
+        if mode == "light":
+            timer_messagebox = CTkMessagebox.CTkMessagebox(
+                title="Clock",
+                # icon="warning",
+                message="Timer ended",
+                font=("Segoe UI Semibold", 16), 
+                option_1="Stop",
+                button_text_color="white",
+                button_color="#4B4B4B",
+                button_hover_color="#585858",
+            )
+
+        elif mode == "dark":
+            timer_messagebox = CTkMessagebox.CTkMessagebox(
+                title="Clock",
+                # icon="",
+                message="Timer ended",
+                font=("Segoe UI Semibold", 16), 
+                option_1="Stop",
+                button_text_color="#292929",
+                button_color="#b8b8b8",
+                button_hover_color="darkgray",
+            )
+        
+        if timer_messagebox.get() == 'Stop':
+            pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+            pygame.mixer.music.play()
+            pygame.mixer.music.stop()
+        
+        start_timer_button.configure(state="normal")  # Enable the start button
+        hours_optionmenu.configure(state="normal")
+        minutes_optionmenu.configure(state="normal")
+        seconds_optionmenu.configure(state="normal")
+
+
+# Function to stop the timer
+def stop_timer():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
+
+    global timer_on
+    timer_on = False
+    
+    start_timer_button.configure(state="normal")  # Enable the start button
+    hours_optionmenu.configure(state="normal")
+    minutes_optionmenu.configure(state="normal")
+    seconds_optionmenu.configure(state="normal")
+
+
+# Create start timer button
+start_timer_button = customtkinter.CTkButton(
+    timer_frame, 
+    text="Start Timer",
+    font=("Segoe UI Semibold", 16),
+    height=35, 
+    command=start_timer,
+)
+start_timer_button.grid(row=3, column=0, padx=15, pady=20)
+
+# Create stop timer button
+stop_timer_button = customtkinter.CTkButton(
+    timer_frame, 
+    text="Stop Timer", 
+    font=("Segoe UI Semibold", 16),
+    height=35, 
+    command=stop_timer,
+)
+stop_timer_button.grid(row=3, column=1, padx=15, pady=20)
+
 
 #__________________________________________________________________________
 
@@ -1051,12 +1691,12 @@ home_button_mcp = customtkinter.CTkButton(
 )
 home_button_mcp.place(x=1059, y=100, anchor="center")
 
-message_centre_frame = customtkinter.CTkFrame(
+buttons_frame_mcp = customtkinter.CTkFrame(
     master=message_centre_page,
     fg_color="transparent",
     bg_color="transparent",
 )
-message_centre_frame.pack(pady=320)
+buttons_frame_mcp.pack(pady=320)
 
 message_icon = customtkinter.CTkImage(
     light_image=Image.open("Images/notice_icon_dark.png"),
@@ -1065,7 +1705,7 @@ message_icon = customtkinter.CTkImage(
 )
 
 message_button = customtkinter.CTkButton(
-    master=message_centre_frame,
+    master=buttons_frame_mcp,
     width=170,
     height=130,
     text="Message",
@@ -1083,7 +1723,7 @@ visitor_record_icon = customtkinter.CTkImage(
 )
 
 visitor_record_button = customtkinter.CTkButton(
-    master=message_centre_frame,
+    master=buttons_frame_mcp,
     width=170,
     height=130,
     text="Visitor Record",
@@ -1101,7 +1741,7 @@ visitor_picture_icon = customtkinter.CTkImage(
 )
 
 visitor_picture_button = customtkinter.CTkButton(
-    master=message_centre_frame,
+    master=buttons_frame_mcp,
     width=170,
     height=130,
     text="Visitor Picture",
@@ -1233,6 +1873,9 @@ home_button_vpp.place(x=1059, y=165, anchor="center")
 
 # Function to create a new window with the clicked image
 def create_image_window(clicked_image, img_width, img_height):
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
+
     image_window = customtkinter.CTkToplevel(root)
     image_window.title("Image Window")
 
@@ -1359,8 +2002,8 @@ digital_frame = customtkinter.CTkFrame(
     master=digital_frame_page,
     #width=int(screen_width * 0.5),  # Adjust width based on your preference
     #height=int(screen_height * 0.5),  # Adjust height based on your preference
-    fg_color="transparent",
-    bg_color="transparent"
+    # fg_color="transparent",
+    # bg_color="transparent"
 )
 digital_frame.place(x=420, y=250)  # Adjust placement based on your preference
 
@@ -1383,6 +2026,8 @@ input_no_entry.grid(row=0, column=0, pady=9, padx=12, columnspan=3)
 
 # Function to update the entry field when a button is clicked
 def on_button_click(value):
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
     current_text = input_no_entry.get()
 
     # Append the button value to the current text
@@ -1420,6 +2065,9 @@ for i, row in enumerate(frame_buttons_texts):
 
 
 def delete_last_character():
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.play()
+
     current_text = input_no_entry.get()
 
     # Handle special case (delete the last character)
