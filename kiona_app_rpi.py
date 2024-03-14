@@ -743,6 +743,7 @@ def change_appearance_mode():
 
         mode = "light"
 
+
 def change_appearance_mode_of_image_buttons():
     global mode
 
@@ -832,7 +833,6 @@ app_bar = customtkinter.CTkFrame(
     bg_color="#BEBEBE",
 )
 app_bar.place(x=0, y=0)
-
 
 date_label = customtkinter.CTkLabel(
     master=app_bar,
@@ -1031,7 +1031,7 @@ def start_stream():
     video_capture = cv2.VideoCapture(0)
     is_capturing = True
    
-    update_webcam()
+    update_camera()
 
 
 def freeze_stream():
@@ -1068,7 +1068,7 @@ def stop_stream():
     cv2.destroyAllWindows()
 
 
-def update_webcam():
+def update_camera():
 
     global current_image
     
@@ -1081,7 +1081,7 @@ def update_webcam():
             photo = ImageTk.PhotoImage(image=current_image)
             video_stream_canvas.create_image(0, 0, image=photo, anchor=customtkinter.NW)
             video_stream_canvas.image = photo
-            root.after(15, update_webcam)
+            root.after(15, update_camera)
     
         else:
             print("Failed to capture frame from webcam. Check webcam index.")
@@ -1377,12 +1377,12 @@ def threading():
     minute_optionmenu.configure(state="disabled")
     am_pm_optionmenu.configure(state="disabled")
 
-    thrd = Thread(target=alarm)
+    thrd = Thread(target=set_alarm)
     thrd.start()
 
 
 # Function to set the alarm
-def alarm():
+def set_alarm():
     global alarm_on
     set_alarm_time = f"{hour_optionmenu.get()}:{minute_optionmenu.get()} {am_pm_optionmenu.get()}"
     while alarm_on:
