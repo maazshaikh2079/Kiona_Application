@@ -24,7 +24,7 @@ root.geometry(f"{screen_width}x{screen_height}")
 
 # Functions:
 def raise_page(page):
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
 
     page.pack(fill='both', expand=True)
@@ -68,7 +68,7 @@ def update_realtime_labels():
 
 
 def change_appearance_mode():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
 
     global mode
@@ -1022,7 +1022,7 @@ video_stream_canvas.pack(padx=50, pady=70, side="left")
 
 # Function definitions
 def start_stream():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
    
     global is_capturing
@@ -1035,7 +1035,7 @@ def start_stream():
 
 
 def freeze_stream():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
    
     global is_capturing
@@ -1044,7 +1044,7 @@ def freeze_stream():
 
 
 def take_a_pic():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
     
     if is_capturing and current_image:
@@ -1052,7 +1052,7 @@ def take_a_pic():
 
 
 def stop_stream():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
     
     global is_capturing
@@ -1366,7 +1366,7 @@ am_pm_optionmenu.grid(row=2, column=1, padx=15, pady=10)
 
 # Function to run the alarm in a separate thread
 def threading():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
 
     global alarm_on
@@ -1420,7 +1420,7 @@ def set_alarm():
                 )
             
             if alarm_messagebox.get() == 'Stop':
-                pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+                pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
                 pygame.mixer.music.play()
                 pygame.mixer.music.stop()
             
@@ -1434,7 +1434,7 @@ def set_alarm():
 
 # Function to cancel the alarm
 def cancel_alarm():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
 
     global alarm_on
@@ -1569,7 +1569,7 @@ seconds_optionmenu.grid(row=2, column=1, padx=15, pady=10)
 
 # Function to run the timer in a separate thread
 def start_timer():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
     
     global timer_on
@@ -1626,7 +1626,7 @@ def timer():
             )
         
         if timer_messagebox.get() == 'Stop':
-            pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+            pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
             pygame.mixer.music.play()
             pygame.mixer.music.stop()
         
@@ -1638,7 +1638,7 @@ def timer():
 
 # Function to stop the timer
 def stop_timer():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
 
     global timer_on
@@ -1871,7 +1871,7 @@ home_button_vpp.place(x=1059, y=165, anchor="center")
 
 # Function to create a new window with the clicked image
 def create_image_window(clicked_image, img_width, img_height):
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
 
     image_window = customtkinter.CTkToplevel(root)
@@ -2024,7 +2024,7 @@ input_no_entry.grid(row=0, column=0, pady=9, padx=12, columnspan=3)
 
 # Function to update the entry field when a button is clicked
 def on_button_click(value):
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
     current_text = input_no_entry.get()
 
@@ -2063,7 +2063,7 @@ for i, row in enumerate(frame_buttons_texts):
 
 
 def delete_last_character():
-    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.wav')
+    pygame.mixer.music.load('Sounds/mixkit-interface-click-1126.mp3')
     pygame.mixer.music.play()
 
     current_text = input_no_entry.get()
