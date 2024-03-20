@@ -8,7 +8,7 @@ import pygame
 import CTkMessagebox
 import os
 
-mode = "light"
+mode = "dark"
 
 customtkinter.set_appearance_mode(mode)
 customtkinter.set_default_color_theme("dark-blue")
@@ -1013,12 +1013,14 @@ current_image = None
 
 video_stream_canvas = customtkinter.CTkCanvas(
     master=video_door_phone_page,
-    width=1065,
-    height=802,
+    # width=1065,
+    width=862,
+    height=800,
     bg="#d9d9d9",  # light mode
     # bg="#292929", # dark mode
 )
-video_stream_canvas.pack(padx=50, pady=70, side="left")
+# Here ->
+video_stream_canvas.pack(padx=50, pady=75, side="left")
 
 # Function definitions
 def start_stream():
@@ -1302,7 +1304,7 @@ alarm_clock_frame = customtkinter.CTkFrame(
     # fg_color="transparent",
     # bg_color="transparent",
 )
-alarm_clock_frame.pack(pady=305)
+alarm_clock_frame.pack(pady=270)
 
 # Create time selection labels and optionmenus
 hour_label = customtkinter.CTkLabel(
@@ -1507,7 +1509,7 @@ timer_frame = customtkinter.CTkFrame(
     # fg_color="transparent",
     # bg_color="transparent",
 )
-timer_frame.pack(pady=305)
+timer_frame.pack(pady=270)
 
 # Create time selection labels and optionmenus for the timer duration
 hours_label = customtkinter.CTkLabel(
