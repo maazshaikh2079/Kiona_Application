@@ -1971,10 +1971,12 @@ def update_image_buttons():
                 command=lambda img=deiconified_image, w=width, h=height:
                 create_image_window(img, w, h),
             )
-
-    change_appearance_mode_of_image_buttons()
-    # Schedule the next update
-    root.after(10000, update_image_buttons)  # Update every 5 seconds. Might be buggy
+    
+    # Uncomment following lines to add image auto-reload/update feature.
+    # Warning: Adding this feature may slow down your application, leading to the occurrence of bugs.
+    # change_appearance_mode_of_image_buttons()
+    # # Schedule the next update
+    # root.after(10000, update_image_buttons)  # Update every 5 seconds. Might be buggy
 
 # Call the update function for the first time
 update_image_buttons()

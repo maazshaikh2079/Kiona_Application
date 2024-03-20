@@ -98,51 +98,29 @@ visitor_pictures_directory_path = "Visitor_Pictures"
 image_buttons = []
 
 def update_image_buttons():
-    # Clear existing buttons
-    # for button in image_buttons:
-    #     button.destroy()
-    # image_buttons.clear()
-
-    # Get a list of all files in the directory
     files_in_directory = os.listdir(visitor_pictures_directory_path)
-
-    # Filter out only the files with specific extensions (e.g., ".jpg")
     image_files = [file for file in files_in_directory if file.lower().endswith('.jpg')]
-
-    # Format the file names into the desired structure
     image_texts = []
     row_size = 4  # Number of columns in each row
     for i in range(0, len(image_files), row_size):
         row = image_files[i:i + row_size]
         image_texts.append(row)
-
-    # Image Buttons
-    # image_buttons = []
-
-    # Re-create the image buttons
     for i, row in enumerate(image_texts):
         for j, file_name in enumerate(row):
             image_location = f"{visitor_pictures_directory_path}/{file_name}"
-
             image_ = Image.open(image_location)
-
             image_original_size = image_.size
             width, height = image_.size
-
             iconified_image = customtkinter.CTkImage(
                 light_image=Image.open(image_location),
                 dark_image=Image.open(image_location),
                 size=(169, 120),
             )
-
             deiconified_image = customtkinter.CTkImage(
                 light_image=Image.open(image_location),
                 dark_image=Image.open(image_location),
                 size=image_original_size,
-                # size=(512, 400),
-                # size=(512, 300),
             )
-
             button = customtkinter.CTkButton(
                 master=visitor_picture_frame,
                 text="",
@@ -153,20 +131,14 @@ def update_image_buttons():
                 image=iconified_image,
             )
             button.grid(row=i + 1, column=j, pady=5, padx=5)
-
             image_buttons.append(button)
-
-            # Set the command for each button to open the image in a new window
             image_buttons[-1].configure(
                 command=lambda img=deiconified_image, w=width, h=height:
                 create_image_window(img, w, h),
             )
+    # Removed the line that schedules the function to run every 5 seconds
 
-    # Here ->
-    # Schedule the next update
-    root.after(5000, update_image_buttons)  # Update every 5 seconds
-
-# Call the update function for the first time
+# Call the function once to initially populate the buttons
 update_image_buttons()
 
 
