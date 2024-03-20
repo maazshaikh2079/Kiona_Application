@@ -81,13 +81,6 @@ def change_appearance_mode():
             bg_color="#BEBEBE",
         )
 
-        # wallpaper_image_label.configure(
-        #     # text_color="#FFA7AE",  # Coral
-        #     text_color="#B6D5F9",  # Halcyon-blueish-gray
-        #     # text_color="#4d6379",  # Blue-gray
-        #     # text_color="#FFC6A4",  # Cream
-        # )
-
         task_bar.configure(
             fg_color="#A0A0A0",
             bg_color="#A0A0A0",
@@ -416,14 +409,6 @@ def change_appearance_mode():
             bg_color="#292929",
         )
 
-        # wallpaper_image_label.configure(
-        #     # text_color="#FFA7AE",  # Coral
-        #     # text_color="#B6D5F9",  # Halcyon-blueish-gray
-        #     # text_color="#4d6379",  # Blue-gray
-        #     # text_color="#FFC6A4",  # Cream
-        #     text_color="white",
-        # )
-
         task_bar.configure(
             fg_color="#292929",
             bg_color="#292929",
@@ -520,13 +505,6 @@ def change_appearance_mode():
             text_color="white",
             hover_color="#585858",
         )
-        #         back_button_cp.configure(
-        #     fg_color="#212121",
-        #     text_color="white",
-        #     hover_color="#585858",
-        #     button_color="#4B4B4B",
-        #     button_hover_color="#23201a",
-        # )
 
         back_button_cp.configure(
             fg_color="#4B4B4B",
@@ -544,7 +522,6 @@ def change_appearance_mode():
             text_color="white",
             button_color="#4B4B4B",
             button_hover_color="#585858",
-            # button_hover_color="#4B4B4B",
         )
 
         minute_label.configure(
@@ -866,7 +843,6 @@ modes_button = customtkinter.CTkButton(
 
 )
 modes_button.place(x=1115, y=2)
-# modes_button.place(x=1120, y=2)
 
 # Task Bar & Stuff:
 task_bar = customtkinter.CTkFrame(
@@ -1013,13 +989,9 @@ current_image = None
 
 video_stream_canvas = customtkinter.CTkCanvas(
     master=video_door_phone_page,
-    # width=1065,
     width=862,
     height=800,
-    bg="#d9d9d9",  # light mode
-    # bg="#292929", # dark mode
 )
-# Here ->
 video_stream_canvas.pack(padx=50, pady=75, side="left")
 
 # Function definitions
@@ -1299,10 +1271,6 @@ pygame.mixer.init()
 
 alarm_clock_frame = customtkinter.CTkFrame(
     clock_page,
-    # width=400,
-    # height=350,
-    # fg_color="transparent",
-    # bg_color="transparent",
 )
 alarm_clock_frame.pack(pady=270)
 
@@ -1506,8 +1474,6 @@ timer_frame = customtkinter.CTkFrame(
     timer_page,
     width=400,
     height=350,
-    # fg_color="transparent",
-    # bg_color="transparent",
 )
 timer_frame.pack(pady=270)
 
@@ -1926,9 +1892,6 @@ def update_image_buttons():
         row = image_files[i:i + row_size]
         image_texts.append(row)
 
-    # Image Buttons
-    # image_buttons = []
-
     # Re-create the image buttons
     for i, row in enumerate(image_texts):
         for j, file_name in enumerate(row):
@@ -1949,8 +1912,6 @@ def update_image_buttons():
                 light_image=Image.open(image_location),
                 dark_image=Image.open(image_location),
                 size=image_original_size,
-                # size=(512, 400),
-                # size=(512, 300),
             )
 
             button = customtkinter.CTkButton(
@@ -1971,9 +1932,10 @@ def update_image_buttons():
                 command=lambda img=deiconified_image, w=width, h=height:
                 create_image_window(img, w, h),
             )
-    
+
     # Uncomment following lines to add image auto-reload/update feature.
     # Warning: Adding this feature may slow down your application, leading to the occurrence of bugs.
+    # Here ->
     # change_appearance_mode_of_image_buttons()
     # # Schedule the next update
     # root.after(10000, update_image_buttons)  # Update every 5 seconds. Might be buggy
@@ -2002,18 +1964,8 @@ home_button_dfp.place(x=1059, y=100, anchor="center")
 # Changed Colors:
 digital_frame = customtkinter.CTkFrame(
     master=digital_frame_page,
-    #width=int(screen_width * 0.5),  # Adjust width based on your preference
-    #height=int(screen_height * 0.5),  # Adjust height based on your preference
-    # fg_color="transparent",
-    # bg_color="transparent"
 )
 digital_frame.place(x=420, y=250)  # Adjust placement based on your preference
-
-# numbers_font = customtkinter.CTkFont(
-#     family="Segoe UI Semibold",
-#     weight="bold",
-#     size=18,
-# )
 
 # Create an entry field
 input_no_entry = customtkinter.CTkEntry(
@@ -2024,7 +1976,6 @@ input_no_entry = customtkinter.CTkEntry(
     corner_radius=5,
 )
 input_no_entry.grid(row=0, column=0, pady=9, padx=12, columnspan=3)
-
 
 # Function to update the entry field when a button is clicked
 def on_button_click(value):
@@ -2037,7 +1988,6 @@ def on_button_click(value):
 
     input_no_entry.delete(0, customtkinter.END)  # Clear the current text in the entry field
     input_no_entry.insert(0, updated_text)  # Update the entry field with the new text
-
 
 # Create buttons
 frame_buttons = []
@@ -2115,7 +2065,6 @@ call_button = customtkinter.CTkButton(
 call_button.place(relx=0.5142, rely=0.897, anchor="s")
 
 #__________________________________________________________________________
-
 
 # Function calls:
 
