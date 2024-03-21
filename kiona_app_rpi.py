@@ -1,13 +1,15 @@
 import customtkinter
+import RPi.GPIO as GPIO
+import queue
 import cv2
 from PIL import Image, ImageTk
 import datetime
 import time
 from threading import Thread
-# import threading
 import pygame
 import CTkMessagebox
 import os
+
 
 mode = "dark"
 
@@ -23,7 +25,55 @@ screen_height = root.winfo_screenheight()
 
 root.geometry(f"{screen_width}x{screen_height}")
 
-# Functions:
+# Set GPIO mode (BCM mode)
+GPIO.setmode(GPIO.BCM)
+
+# Set up GPIO pin for the button
+bell_button_pin = 18
+GPIO.setup(bell_button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+previous_bell_button_state = GPIO.input(bell_button_pin)
+
+#________________________________________________________________________
+
+# Functions for GPIO based Components:
+
+# Queue for communication between threads
+button_queue = queue.Queue()
+
+def gpio_loop():
+    global previous_bell_button_state
+
+    try:
+        while True:
+
+            # Read the state of the button
+            bell_button_state = GPIO.input(bell_button_pin)
+
+            if bell_button_state != previous_bell_button_state:
+                previous_bell_button_state = bell_button_state
+
+                # Check if the button is pressed
+                if bell_button_state == GPIO.LOW:
+                    # Put a message into the queue
+                    button_queue.put("ButtonPressed")
+                    print("ButtonPressed")
+
+            # Delay to debounce the button
+            time.sleep(0.1)
+
+    except KeyboardInterrupt:
+        print("\nExiting program")
+
+    finally:
+        # Clean up GPIO
+        GPIO.cleanup()
+
+
+#________________________________________________________________________
+
+# Functions for responsive UI:
+
 def raise_page(page):
     pygame.mixer.music.load('Sounds/glass-knock-11-short.mp3')
     pygame.mixer.music.play()
@@ -1630,7 +1680,6 @@ def timer():
         if mode == "light":
             timer_messagebox = CTkMessagebox.CTkMessagebox(
                 title="Clock",
-                # icon="warning",
                 message="Timer ended",
                 font=("Segoe UI Semibold", 16), 
                 option_1="Stop",
@@ -1642,7 +1691,6 @@ def timer():
         elif mode == "dark":
             timer_messagebox = CTkMessagebox.CTkMessagebox(
                 title="Clock",
-                # icon="",
                 message="Timer ended",
                 font=("Segoe UI Semibold", 16), 
                 option_1="Stop",
@@ -2120,13 +2168,86 @@ call_button.place(relx=0.5142, rely=0.897, anchor="s")
 
 #__________________________________________________________________________
 
-# Function calls:
-
 raise_page(home_page)
 
 change_appearance_mode()
 
 update_realtime_labels()
 
+def process_button_queue():
+    try:
+        while True:
+            # Check if there is a message in the queue
+            message_ = button_queue.get_nowait()
+            if message_ == "ButtonPressed":
+                # Handle button press
+                print("Button is pressed")
+             
+                # def play_ringtone():
+                pygame.mixer.music.load('Sounds/tone.mp3')
+                pygame.mixer.music.play()
 
+                # thrd = Thread(target=play_ringtone)
+                # thrd.start()
+
+                # Put your tkinter code here to raise page and show message box
+                
+                raise_page(video_door_phone_page)
+                
+                if mode == "light":
+
+                    pygame.mixer.music.load('Sounds/tone.mp3')
+                    pygame.mixer.music.play()
+
+                    call_messagebox = CTkMessagebox.CTkMessagebox(
+                        title="Visitor's Call",
+                        icon="info",
+                        message="Visitors at the door",
+                        font=("Segoe UI Semibold", 16), 
+                        option_1="OK",
+                        button_text_color="white",
+                        button_color="#4B4B4B",
+                        button_hover_color="#585858",
+                    )
+
+                elif mode == "dark":
+
+                    pygame.mixer.music.load('Sounds/tone.mp3')
+                    pygame.mixer.music.play()
+
+                    call_messagebox = CTkMessagebox.CTkMessagebox(
+                        title="Visitor's Call",
+                        icon="info",
+                        message="Visitors at the door",
+                        font=("Segoe UI Semibold", 16), 
+                        option_1="OK",
+                        button_text_color="#292929",
+                        button_color="#b8b8b8",
+                        button_hover_color="darkgray",
+                    )
+            
+                if call_messagebox.get() == 'OK':
+                    pygame.mixer.music.load('Sounds/glass-knock-11-short.mp3')
+                    pygame.mixer.music.play()
+                    pygame.mixer.music.stop()
+
+    except queue.Empty:
+        print("Queue is empty")
+        pass
+
+
+# Create a separate thread to run gpio_loop()
+gpio_thread = Thread(target=gpio_loop)
+gpio_thread.start()
+
+# Define a function to check the button queue periodically
+def check_button_queue():
+    process_button_queue()  # Call the function to process the button queue
+    root.after(1000, check_button_queue)  # Schedule the function to be called again after 1 second
+
+
+# Start checking the button queue
+check_button_queue()
+
+# Start the tkinter main loop
 root.mainloop()
