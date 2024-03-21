@@ -34,12 +34,18 @@ GPIO.setup(bell_button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 previous_bell_button_state = GPIO.input(bell_button_pin)
 
+# Set up GPIO pin for the button
+hazard_button_pin = 2
+GPIO.setup(hazard_button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+previous_hazard_button_state = GPIO.input(bell_button_pin)
+
 #________________________________________________________________________
 
 # Functions for GPIO based Components:
 
 # Queue for communication between threads
-button_queue = queue.Queue()
+bell_button_queue = queue.Queue()
 
 def gpio_loop():
     global previous_bell_button_state
@@ -56,7 +62,7 @@ def gpio_loop():
                 # Check if the button is pressed
                 if bell_button_state == GPIO.LOW:
                     # Put a message into the queue
-                    button_queue.put("ButtonPressed")
+                    bell_button_queue.put("ButtonPressed")
                     print("ButtonPressed")
 
             # Delay to debounce the button
@@ -2233,11 +2239,11 @@ change_appearance_mode()
 
 update_realtime_labels()
 
-def process_button_queue():
+def process_bell_button_queue():
     try:
         while True:
             # Check if there is a message in the queue
-            message_ = button_queue.get_nowait()
+            message_ = bell_button_queue.get_nowait()
             if message_ == "ButtonPressed":
                 # Handle button press
                 print("Button is pressed")
@@ -2300,13 +2306,13 @@ gpio_thread = Thread(target=gpio_loop)
 gpio_thread.start()
 
 # Define a function to check the button queue periodically
-def check_button_queue():
-    process_button_queue()  # Call the function to process the button queue
-    root.after(1000, check_button_queue)  # Schedule the function to be called again after 1 second
+def check_bell_button_queue():
+    process_bell_button_queue()  # Call the function to process the button queue
+    root.after(1000, check_bell_button_queue)  # Schedule the function to be called again after 1 second
 
 
 # Start checking the button queue
-check_button_queue()
+check_bell_button_queue()
 
 # Start the tkinter main loop
 root.mainloop()
