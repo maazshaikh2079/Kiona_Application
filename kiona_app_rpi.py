@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 import datetime
 import time
 from threading import Thread
+# import threading
 import pygame
 import CTkMessagebox
 import os
@@ -113,6 +114,12 @@ def change_appearance_mode():
         # Video Door Phone Page GUI Components:
 
         start_stream_button.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",
+        )
+
+        speak_button.configure(
             fg_color="#B8B8B8",
             text_color="#292929",
             hover_color="darkgray",
@@ -440,6 +447,12 @@ def change_appearance_mode():
 
         # Video Door Phone Page GUI Components:
         start_stream_button.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
+
+        speak_button.configure(
             fg_color="#4B4B4B",
             text_color="white",
             hover_color="#585858",
@@ -1008,7 +1021,29 @@ def start_stream():
     update_camera()
 
 
+def record_microphone():
+    # duration = input("Enter duration (in seconds) for microphone test: ")
+    duration = 5
+    command = f"arecord --format=S16_LE --duration={duration} --rate=16000 --file-type=raw out.raw"
+    os.system(command)
+
+
+def play_recorded_file():
+    command = "aplay --format=S16_LE --rate=16000 out.raw"
+    os.system(command)
+
+
+def speak():
+    
+    if is_capturing and current_image:
+        pygame.mixer.music.load('Sounds/glass-knock-11-short.mp3')
+        pygame.mixer.music.play()
+        thrd = Thread(target=lambda: (record_microphone(), play_recorded_file()))
+        thrd.start()
+
+
 def freeze_stream():
+    
     pygame.mixer.music.load('Sounds/glass-knock-11-short.mp3')
     pygame.mixer.music.play()
    
@@ -1018,14 +1053,15 @@ def freeze_stream():
 
 
 def take_a_pic():
-    pygame.mixer.music.load('Sounds/glass-knock-11-short.mp3')
-    pygame.mixer.music.play()
     
     if is_capturing and current_image:
+        pygame.mixer.music.load('Sounds/glass-knock-11-short.mp3')
+        pygame.mixer.music.play()
         current_image.save(f'Visitor_Pictures/selfie_{int(time.time())}.jpg')
 
 
 def stop_stream():
+
     pygame.mixer.music.load('Sounds/glass-knock-11-short.mp3')
     pygame.mixer.music.play()
     
@@ -1081,6 +1117,28 @@ start_stream_button = customtkinter.CTkButton(
 )
 start_stream_button.place(x=1059, y=100, anchor="center")
 
+speak_icon = customtkinter.CTkImage(
+    light_image=Image.open('Images/speak_dark.png'),
+    dark_image=Image.open('Images/speak_light.png'),
+    size=(48, 48),
+)
+
+# button to speak for ten seconds:
+speak_button = customtkinter.CTkButton(
+    master=video_door_phone_page,
+    text="   Speak             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=speak_icon,
+    compound="left",
+    command=speak,
+)
+speak_button.place(x=1059, y=165, anchor="center")
+
+
 freeze_stream_icon = customtkinter.CTkImage(
     light_image=Image.open('Images/freeze_icon_dark2.png'),
     dark_image=Image.open('Images/freeze_icon_light2.png'),
@@ -1099,7 +1157,7 @@ freeze_stream_button = customtkinter.CTkButton(
     compound="left",
     command=freeze_stream,
 )
-freeze_stream_button.place(x=1059, y=165, anchor="center")
+freeze_stream_button.place(x=1059, y=230, anchor="center")
 
 take_a_pic_icon = customtkinter.CTkImage(
     light_image=Image.open('Images/take_pic_icon_dark2.png'),
@@ -1119,7 +1177,7 @@ take_a_pic_button = customtkinter.CTkButton(
     compound="left",
     command=take_a_pic,
 )
-take_a_pic_button.place(x=1059, y=230, anchor="center")
+take_a_pic_button.place(x=1059, y=295, anchor="center")
 
 stop_stream_icon = customtkinter.CTkImage(
     light_image=Image.open('Images/stop_icon_dark2.png'),
@@ -1139,7 +1197,7 @@ stop_stream_button = customtkinter.CTkButton(
     compound="left",
     command=stop_stream,
 )
-stop_stream_button.place(x=1059, y=295, anchor="center")
+stop_stream_button.place(x=1059, y=360, anchor="center")
 
 home_button_vdpp = customtkinter.CTkButton(
     master=video_door_phone_page,
@@ -1153,7 +1211,7 @@ home_button_vdpp = customtkinter.CTkButton(
     compound="left",
     command=lambda: raise_page(home_page)
 )
-home_button_vdpp.place(x=1059, y=360, anchor="center")
+home_button_vdpp.place(x=1059, y=425, anchor="center")
 
 # __________________________________________________________________________
 
@@ -1770,7 +1828,6 @@ back_button_vrp = customtkinter.CTkButton(
     corner_radius=0,
     height=50,
     width=189,
-#    width=186,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=back_icon,
@@ -1813,7 +1870,6 @@ back_button_vpp = customtkinter.CTkButton(
     corner_radius=0,
     height=50,
     width=189,
-#    width=186,
     font=("Segoe UI Semibold", 16),
     bg_color="black",
     image=back_icon,
@@ -1847,7 +1903,6 @@ def create_image_window(clicked_image, img_width, img_height):
 
     image_window_size = f"{img_width}x{img_height}"
     image_window.geometry(image_window_size)
-    # image_window.resizable(False, False)
 
     image_frame = customtkinter.CTkFrame(master=image_window)
     image_frame.pack(fill="both", expand=True)
@@ -1935,7 +1990,6 @@ def update_image_buttons():
 
     # Uncomment following lines to add image auto-reload/update feature.
     # Warning: Adding this feature may slow down your application, leading to the occurrence of bugs.
-    # Here ->
     # change_appearance_mode_of_image_buttons()
     # # Schedule the next update
     # root.after(10000, update_image_buttons)  # Update every 5 seconds. Might be buggy
