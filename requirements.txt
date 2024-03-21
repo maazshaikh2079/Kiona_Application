@@ -3,3 +3,4 @@ Pillow
 opencv-contrib-python
 pygame
 CTkMessagebox
+RPi.GPIO
