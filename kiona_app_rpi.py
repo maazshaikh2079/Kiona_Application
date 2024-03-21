@@ -80,7 +80,10 @@ def raise_page(page):
 
     page.pack(fill='both', expand=True)
     page.tkraise()
+
     for p in [
+        fire_hazard_page,
+
         home_page,
 
         no_visitor_page,
@@ -126,6 +129,12 @@ def change_appearance_mode():
 
     if mode == "light":
         customtkinter.set_appearance_mode("light")
+
+        home_button_fhp.configure(
+            fg_color="#B8B8B8",
+            text_color="#292929",
+            hover_color="darkgray",   
+        )
 
         app_bar.configure(
             fg_color="#BEBEBE",
@@ -460,6 +469,12 @@ def change_appearance_mode():
     elif mode == "dark":
 
         customtkinter.set_appearance_mode("dark")
+
+        home_button_fhp.configure(
+            fg_color="#4B4B4B",
+            text_color="white",
+            hover_color="#585858",
+        )
 
         app_bar.configure(
             fg_color="#292929",
@@ -807,6 +822,9 @@ def change_appearance_mode_of_image_buttons():
 
 
 # Pages & GUI Components:
+# Fire Hazard Page
+fire_hazard_page = customtkinter.CTkFrame(master=root)
+
 # Home Page
 home_page = customtkinter.CTkFrame(master=root)
 
@@ -828,13 +846,67 @@ visitor_picture_page = customtkinter.CTkFrame(master=root)
 # Digital Frame Page
 digital_frame_page = customtkinter.CTkFrame(master=root)
 
+
+# _______________________________________________________________________
+
+# Calculate image size based on screen resolution
+
+image_width = screen_width
+image_height = screen_height
+
+#________________________________________________________________________
+
+# Home and Back button Icon:
+
+# Home Icon:
+home_icon = customtkinter.CTkImage(
+    light_image=Image.open('Images/home_icon_dark.png'),
+    dark_image=Image.open('Images/home_icon_light.png'),
+    size=(48, 48),
+)
+
+# Back Icon:
+back_icon = customtkinter.CTkImage(
+    light_image=Image.open('Images/back_icon_dark.png'),
+    dark_image=Image.open('Images/back_icon_light.png'),
+    size=(48, 48),
+)
+
+#________________________________________________________________________
+
+# Fire Hazard Page:
+
+fire_hazard_image = customtkinter.CTkImage(
+    light_image=Image.open("Images/Fire-Hazard-Image.jpg")
+    .resize((image_width, image_height)),
+    dark_image=Image.open("Images/Fire-Hazard-Image.jpg")
+    .resize((image_width, image_height)),
+    size=(image_width, image_height),
+)
+
+fire_hazard_image_label = customtkinter.CTkLabel(
+    master=fire_hazard_page,
+    image=fire_hazard_image,
+)
+fire_hazard_image_label.pack(fill='both', expand=True)
+
+home_button_fhp = customtkinter.CTkButton(
+    master=fire_hazard_page,
+    text="  Home             ",
+    corner_radius=0,
+    height=50,
+    width=189,
+    font=("Segoe UI Semibold", 16),
+    bg_color="black",
+    image=home_icon,
+    compound="left",
+    command=lambda: raise_page(home_page)
+)
+home_button_fhp.place(x=1059, y=100, anchor="center")
+
 #________________________________________________________________________
 
 # Home page GUI components:
-
-# Calculate image size based on screen resolution
-image_width = screen_width
-image_height = screen_height
 
 wallpaper_image = customtkinter.CTkImage(
     light_image=Image.open("Images/Modern-Building-Morning_1024x600.jpg")
@@ -1024,20 +1096,6 @@ digital_frame_button = customtkinter.CTkButton(
     command=lambda: raise_page(digital_frame_page)
 )
 digital_frame_button.place(x=1059, y=295, anchor="center")
-
-# Home Icon:
-home_icon = customtkinter.CTkImage(
-    light_image=Image.open('Images/home_icon_dark.png'),
-    dark_image=Image.open('Images/home_icon_light.png'),
-    size=(48, 48),
-)
-
-# Back Icon:
-back_icon = customtkinter.CTkImage(
-    light_image=Image.open('Images/back_icon_dark.png'),
-    dark_image=Image.open('Images/back_icon_light.png'),
-    size=(48, 48),
-)
 
 #__________________________________________________________________________
 
