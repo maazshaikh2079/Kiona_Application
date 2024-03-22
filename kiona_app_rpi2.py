@@ -46,26 +46,41 @@ previous_hazard_button_state = GPIO.input(bell_button_pin)
 
 # Queue for communication between threads
 bell_button_queue = queue.Queue()
+hazard_button_queue = queue.Queue()
 
 def gpio_loop():
     global previous_bell_button_state
+    global previous_hazard_button_state
 
     try:
         while True:
 
-            # Read the state of the button
+            # Read the state of bell button
             bell_button_state = GPIO.input(bell_button_pin)
-
+            
             if bell_button_state != previous_bell_button_state:
                 previous_bell_button_state = bell_button_state
 
-                # Check if the button is pressed
+                # Check if bell button is pressed
                 if bell_button_state == GPIO.LOW:
-                    # Put a message into the queue
-                    bell_button_queue.put("ButtonPressed")
-                    print("ButtonPressed")
+                    # Put a message into the bell button queue
+                    bell_button_queue.put("BellButtonPressed")
+                    print("BellButtonPressed")
 
-            # Delay to debounce the button
+            # Read the state of hazard button
+            hazard_button_state = GPIO.input(hazard_button_pin)
+            
+            if hazard_button_state != previous_hazard_button_state:
+                previous_hazard_button_state = hazard_button_state
+
+                # Check if hazard button is pressed
+                if hazard_button_state == GPIO.LOW:
+                    # Put a message into the hazard button queue
+                    hazard_button_queue.put("HazardButtonPressed")
+                    print("HazardButtonPressed")
+
+
+            # Delay to debounce buttons
             time.sleep(0.1)
 
     except KeyboardInterrupt:
@@ -1608,7 +1623,6 @@ cancel_alarm_button = customtkinter.CTkButton(
 )
 cancel_alarm_button.grid(row=3, column=1, padx=15, pady=20)
 
-
 #__________________________________________________________________________
 
 # Timer Page GUI Components
@@ -2244,18 +2258,12 @@ def process_bell_button_queue():
         while True:
             # Check if there is a message in the queue
             message_ = bell_button_queue.get_nowait()
-            if message_ == "ButtonPressed":
+            if message_ == "BellButtonPressed":
                 # Handle button press
-                print("Button is pressed")
+                print("Bell button is pressed")
              
-                # def play_ringtone():
-                pygame.mixer.music.load('Sounds/tone.mp3')
-                pygame.mixer.music.play()
-
-                # thrd = Thread(target=play_ringtone)
-                # thrd.start()
-
-                # Put your tkinter code here to raise page and show message box
+                # pygame.mixer.music.load('Sounds/tone.mp3')
+                # pygame.mixer.music.play()
                 
                 raise_page(video_door_phone_page)
                 
@@ -2297,22 +2305,85 @@ def process_bell_button_queue():
                     pygame.mixer.music.stop()
 
     except queue.Empty:
-        print("Queue is empty")
-        pass
+        print("Bell button queue is empty")
+
+
+def process_hazard_button_queue():
+    try:
+        while True:
+            # Check if there is a message in the queue
+            message_ = hazard_button_queue.get_nowait()
+            if message_ == "HazardButtonPressed":
+                # Handle button press
+                print("Hazard button is pressed")
+
+                # pygame.mixer.music.load('Sounds/emergency-alarm-with-reverb-29431.mp3')
+                # pygame.mixer.music.play()
+                
+                raise_page(fire_hazard_page)
+                
+                if mode == "light":
+
+                    pygame.mixer.music.load('Sounds/emergency-alarm-with-reverb-29431.mp3')
+                    pygame.mixer.music.play()
+
+                    call_messagebox = CTkMessagebox.CTkMessagebox(
+                        title="Warning!",
+                        icon="warning",
+                        message="Hazard detected! Follow the given evacuation procedure.",
+                        font=("Segoe UI Semibold", 16), 
+                        option_1="OK",
+                        button_text_color="white",
+                        button_color="#4B4B4B",
+                        button_hover_color="#585858",
+                    )
+
+                elif mode == "dark":
+
+                    pygame.mixer.music.load('Sounds/emergency-alarm-with-reverb-29431.mp3')
+                    pygame.mixer.music.play()
+
+                    call_messagebox = CTkMessagebox.CTkMessagebox(
+                        title="Warning!",
+                        icon="warning",
+                        message="Hazard detected! Follow the given evacuation procedure.",
+                        font=("Segoe UI Semibold", 16), 
+                        option_1="OK",
+                        button_text_color="#292929",
+                        button_color="#b8b8b8",
+                        button_hover_color="darkgray",
+                    )
+            
+                if call_messagebox.get() == 'OK':
+                    pygame.mixer.music.load('Sounds/glass-knock-11-short.mp3')
+                    pygame.mixer.music.play()
+                    pygame.mixer.music.stop()
+
+    except queue.Empty:
+        print("Hazard button queue is empty")
 
 
 # Create a separate thread to run gpio_loop()
 gpio_thread = Thread(target=gpio_loop)
 gpio_thread.start()
 
-# Define a function to check the button queue periodically
+# Define a function to check the bell button queue periodically
 def check_bell_button_queue():
-    process_bell_button_queue()  # Call the function to process the button queue
+    process_bell_button_queue()  # Call the function to process the bell button queue
     root.after(1000, check_bell_button_queue)  # Schedule the function to be called again after 1 second
 
 
-# Start checking the button queue
+# Define a function to check the hazard button queue periodically
+def check_hazard_button_queue():
+    process_hazard_button_queue()  # Call the function to process the hazard button queue
+    root.after(1000, check_hazard_button_queue)  # Schedule the function to be called again after 1 second
+
+
+# Start checking the bell button queue
 check_bell_button_queue()
+
+# Start checking the hazard button queue
+check_hazard_button_queue()
 
 # Start the tkinter main loop
 root.mainloop()
