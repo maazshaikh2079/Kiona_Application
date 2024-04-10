@@ -2321,7 +2321,7 @@ def process_hazard_button_queue():
                     pygame.mixer.music.load('Sounds/emergency-alarm-with-reverb-29431.mp3')
                     pygame.mixer.music.play()
 
-                    call_messagebox = CTkMessagebox.CTkMessagebox(
+                    hazard_messagebox = CTkMessagebox.CTkMessagebox(
                         title="Warning!",
                         icon="warning",
                         message="Hazard detected!\nFollow the given evacuation procedure.",
@@ -2337,7 +2337,7 @@ def process_hazard_button_queue():
                     pygame.mixer.music.load('Sounds/emergency-alarm-with-reverb-29431.mp3')
                     pygame.mixer.music.play()
 
-                    call_messagebox = CTkMessagebox.CTkMessagebox(
+                    hazard_messagebox = CTkMessagebox.CTkMessagebox(
                         title="Warning!",
                         icon="warning",
                         message="Hazard detected! Follow the given evacuation procedure.",
@@ -2348,7 +2348,7 @@ def process_hazard_button_queue():
                         button_hover_color="darkgray",
                     )
             
-                if call_messagebox.get() == 'OK':
+                if hazard_messagebox.get() == 'OK':
                     pygame.mixer.music.load('Sounds/glass-knock-11-short.mp3')
                     pygame.mixer.music.play()
                     pygame.mixer.music.stop()
