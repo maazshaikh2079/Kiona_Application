@@ -35,10 +35,10 @@ GPIO.setup(bell_button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 previous_bell_button_state = GPIO.input(bell_button_pin)
 
 # Set up GPIO pin for the button
-hazard_button_pin = 2
-GPIO.setup(hazard_button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+hazard_sensor_pin = 2
+GPIO.setup(hazard_sensor_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-previous_hazard_button_state = GPIO.input(bell_button_pin)
+previous_hazard_sensor_state = GPIO.input(bell_button_pin)
 
 #________________________________________________________________________
 
@@ -46,11 +46,11 @@ previous_hazard_button_state = GPIO.input(bell_button_pin)
 
 # Queue for communication between threads
 bell_button_queue = queue.Queue()
-hazard_button_queue = queue.Queue()
+hazard_sensor_queue = queue.Queue()
 
 def gpio_loop():
     global previous_bell_button_state
-    global previous_hazard_button_state
+    global previous_hazard_sensor_state
 
     try:
         while True:
@@ -67,17 +67,17 @@ def gpio_loop():
                     bell_button_queue.put("BellButtonPressed")
                     print("BellButtonPressed")
 
-            # Read the state of hazard button
-            hazard_button_state = GPIO.input(hazard_button_pin)
+            # Read the state of hazard sensor
+            hazard_sensor_state = GPIO.input(hazard_sensor_pin)
             
-            if hazard_button_state != previous_hazard_button_state:
-                previous_hazard_button_state = hazard_button_state
+            if hazard_sensor_state != previous_hazard_sensor_state:
+                previous_hazard_sensor_state = hazard_sensor_state
 
-                # Check if hazard button is pressed
-                if hazard_button_state == GPIO.LOW:
-                    # Put a message into the hazard button queue
-                    hazard_button_queue.put("HazardButtonPressed")
-                    print("HazardButtonPressed")
+                # Check if hazard sensor detects hazard
+                if hazard_sensor_state == GPIO.LOW:
+                    # Put a message into the hazard sensor queue
+                    hazard_sensor_queue.put("HazardDetected")
+                    print("HazardDetected")
 
             # Delay to debounce buttons
             time.sleep(0.1)
@@ -231,13 +231,6 @@ def change_appearance_mode():
 
         video_stream_canvas.configure(
             bg="#d9d9d9",
-        )
-
-        # No Visitor Page GUI Components
-        home_button_nvp.configure(
-            fg_color="#B8B8B8",
-            text_color="#292929",
-            hover_color="darkgray",
         )
 
         # Alarm Page GUI Components:
@@ -569,13 +562,6 @@ def change_appearance_mode():
 
         video_stream_canvas.configure(
             bg="#292929",
-        )
-
-        # No Visitor Page GUI Components
-        home_button_nvp.configure(
-            fg_color="#4B4B4B",
-            text_color="white",
-            hover_color="#585858",
         )
 
         # Alarm Page GUI Components:
@@ -1341,24 +1327,6 @@ home_button_vdpp = customtkinter.CTkButton(
     command=lambda: raise_page(home_page)
 )
 home_button_vdpp.place(x=1059, y=425, anchor="center")
-
-# __________________________________________________________________________
-
-# No Visitor Page GUI Components:
-
-home_button_nvp = customtkinter.CTkButton(
-    master=no_visitor_page,
-    text="  Home             ",
-    corner_radius=0,
-    height=50,
-    width=189,
-    font=("Segoe UI Semibold", 16),
-    bg_color="black",
-    image=home_icon,
-    compound="left",
-    command=lambda: raise_page(home_page)
-)
-home_button_nvp.place(x=1059, y=100, anchor="center")
 
 #__________________________________________________________________________
 
@@ -2305,14 +2273,14 @@ def process_bell_button_queue():
         print("Bell button queue is empty")
 
 
-def process_hazard_button_queue():
+def process_hazard_sensor_queue():
     try:
         while True:
             # Check if there is a message in the queue
-            message_ = hazard_button_queue.get_nowait()
-            if message_ == "HazardButtonPressed":
+            message_ = hazard_sensor_queue.get_nowait()
+            if message_ == "HazardDetected":
                 # Handle button press
-                print("Hazard button is pressed")
+                print("Hazard sensor detected hazard")
                 
                 raise_page(fire_hazard_page)
                 
@@ -2354,7 +2322,7 @@ def process_hazard_button_queue():
                     pygame.mixer.music.stop()
 
     except queue.Empty:
-        print("Hazard button queue is empty")
+        print("Hazard sensor queue is empty")
 
 
 # Create a separate thread to run gpio_loop()
@@ -2367,17 +2335,17 @@ def check_bell_button_queue():
     root.after(1000, check_bell_button_queue)  # Schedule the function to be called again after 1 second
 
 
-# Define a function to check the hazard button queue periodically
-def check_hazard_button_queue():
-    process_hazard_button_queue()  # Call the function to process the hazard button queue
-    root.after(1000, check_hazard_button_queue)  # Schedule the function to be called again after 1 second
+# Define a function to check the hazard sensor queue periodically
+def check_hazard_sensor_queue():
+    process_hazard_sensor_queue()  # Call the function to process the hazard sensor queue
+    root.after(1000, check_hazard_sensor_queue)  # Schedule the function to be called again after 1 second
 
 
 # Start checking the bell button queue
 check_bell_button_queue()
 
-# Start checking the hazard button queue
-check_hazard_button_queue()
+# Start checking the hazard sensor queue
+check_hazard_sensor_queue()
 
 # Start the tkinter main loop
 root.mainloop()
