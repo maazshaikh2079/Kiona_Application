@@ -2368,7 +2368,7 @@ def process_hazard_button_queue():
                     pygame.mixer.music.stop()
 
     except queue.Empty:
-        print("Hazard sensor queue is empty")
+        print("Hazard button queue is empty")
 
 
 # Create a separate thread to run keys_loop()
